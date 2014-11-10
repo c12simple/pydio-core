@@ -98,10 +98,11 @@ Class.create("AjxpInstaller", AjxpPane, {
             }.bind(this));
             this.htmlElement.down("#start_button").observe("click", function(){
                 new Effect.Morph(this.htmlElement.down(".install_pydio_logo"), {
-                    style:'height:30px',
+                    style:'height:60px',
                     duration:0.5
                 });
-                this.htmlElement.down(".installerWelcome").update("Click on each section to edit parameters");
+                this.htmlElement.down(".installerLang").hide();
+                this.htmlElement.down(".installerWelcome").update(MessageHash["installer.8"]);
                 new Effect.Appear(this.formElement, {afterFinish : function(){
                     this.formElement.SF_accordion.activate(this.formElement.down('.accordion_toggle'));
                 }.bind(this)});
@@ -137,15 +138,26 @@ Class.create("AjxpInstaller", AjxpPane, {
             progress.show();
             modal.refreshDialogPosition();
             conn.onComplete = function(transport){
+                new Effect.Fade(progress.down('span.icon-spinner'), {afterFinish : function(){
+                    progress.down('span.icon-spinner').remove();
+                    modal.refreshDialogPosition();
+                }});
                 if(transport.responseText == "OK"){
                     window.setTimeout(function(){
                         progress.insert('...done! <br/>The page will now reload automatically. You can log in with the admin user <b>"'+params.get('ADMIN_USER_LOGIN')+'"</b> you have just defined.<br/><br/>');
-                        new Effect.Fade(progress.down('span.icon-spinner'), {afterFinish : function(){progress.down('span.icon-spinner').remove();}});
-                        modal.refreshDialogPosition();
                         window.setTimeout(function(){
                             document.location.reload(true);
                         }, 6000);
                     }, 3000);
+                }else{
+                    var json = transport.responseJSON;
+                    progress.insert('<u>Warning</u>: cannot write htaccess file. Please copy the content below and update the ' +
+                        'file located at the following location: '  + json['file'] + '<br> Hit <kbd>Ctrl/Cmd</kbd>+<kbd>C</kbd> ' +
+                        'to copy the content to your clipboard. Simply reload this page once it\'s done.');
+                    var textarea = new Element('textarea', {style:'width: 98%;height: 260px; margin-top:10px;'}).update(json['content']);
+                    progress.insert(textarea);
+                    textarea.select();
+                    modal.refreshDialogPosition();
                 }
             };
             conn.sendAsync();

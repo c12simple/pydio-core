@@ -87,7 +87,7 @@ class ldapAuthDriver extends AbstractAuthDriver
                 $this->ldapFilter = "(" . $this->ldapFilter . ")";
             }
         } else {
-            if ($this->hasGroupsMapping && !empty($this->ldapGFilter)) {
+            if (!empty($this->hasGroupsMapping) && !empty($this->ldapGFilter)) {
                 $this->ldapFilter = "!(".$this->ldapGFilter.")";
             }
         }
@@ -317,9 +317,9 @@ class ldapAuthDriver extends AbstractAuthDriver
     }
 
     // $baseGroup = "/"
-    public function listUsersPaginated($baseGroup, $regexp, $offset, $limit)
+    public function listUsersPaginated($baseGroup, $regexp, $offset, $limit, $recursive = true)
     {
-        if ($this->hasGroupsMapping !== false) {
+        if (!empty($this->hasGroupsMapping)) {
             if ($baseGroup == "/") {
                 $this->dynamicFilter = "!(".$this->hasGroupsMapping."=*)";
             } else {
@@ -330,10 +330,7 @@ class ldapAuthDriver extends AbstractAuthDriver
             return array();
         }
 
-        if($regexp[0]=="^") $regexp = ltrim($regexp, "^")."*";
-        else if($regexp[strlen($regexp)-1] == "$") $regexp = "*".rtrim($regexp, "$");
-
-        $entries = $this->getUserEntries($regexp, false, $offset, $limit, true);
+        $entries = $this->getUserEntries(AJXP_Utils::regexpToLdap($regexp), false, $offset, $limit, true);
         $this->dynamicFilter = null;
         $persons = array();
         unset($entries['count']); // remove 'count' entry
@@ -344,9 +341,9 @@ class ldapAuthDriver extends AbstractAuthDriver
         }
         return $persons;
     }
-    public function getUsersCount($baseGroup = "/", $regexp = "", $filterProperty = null, $filterValue = null)
+    public function getUsersCount($baseGroup = "/", $regexp = "", $filterProperty = null, $filterValue = null, $recursive = true)
     {
-        if ($this->hasGroupsMapping !== false) {
+        if (!empty($this->hasGroupsMapping)) {
             if ($baseGroup == "/") {
                 $this->dynamicFilter = "!(".$this->hasGroupsMapping."=*)";
             } else {
@@ -354,12 +351,7 @@ class ldapAuthDriver extends AbstractAuthDriver
             }
         }
 
-        $re = null;
-        if (!empty($regexp)) {
-            if($regexp[0]=="^") $re = ltrim($regexp, "^")."*";
-            else if($regexp[strlen($regexp)-1] == "$") $re = "*".rtrim($regexp, "$");
-        }
-        $res = $this->getUserEntries($re, true, null);
+        $res = $this->getUserEntries(AJXP_Utils::regexpToLdap($regexp), true, null);
         $this->dynamicFilter = null;
         return $res["count"];
     }
@@ -378,7 +370,7 @@ class ldapAuthDriver extends AbstractAuthDriver
             $arr[$this->separateGroup] = "LDAP Annuary";
             return $arr;
         }
-        if ($this->hasGroupsMapping) {
+        if (!empty($this->hasGroupsMapping)) {
             $origUsersDN = $this->ldapDN;
             $origUsersFilter = $this->ldapFilter;
             $origUsersAttr = $this->ldapUserAttr;
@@ -422,7 +414,7 @@ class ldapAuthDriver extends AbstractAuthDriver
     }
 
 
-    public function listUsers($baseGroup = "/")
+    public function listUsers($baseGroup = "/", $recursive = true)
     {
         return $this->listUsersPaginated($baseGroup, null, -1, -1);
     }
@@ -495,30 +487,79 @@ class ldapAuthDriver extends AbstractAuthDriver
         unset($entries['count']); // remove 'count' entry
         $groupData = $entries[0];
 
-        $memberOf = $groupData[strtolower($this->hasGroupsMapping)][0];
+        /*
+         * memberOf could be a array because of a object(such as user) can be belong to multi-groups
+         * example: object w10S was belong to 04 groups
+         * [
+            {"memberof":
+                {
+                    "0":"CN=globalmarkettings,OU=MARKETING,OU=company,DC=vpydio,DC=fr",
+                    "1":"CN=algers,CN=Alger,OU=algeria,OU=Africe,OU=MARKETING,OU=company,DC=vpydio,DC=fr",
+                    "2":"CN=algerias,OU=algeria,OU=Africe,OU=MARKETING,OU=company,DC=vpydio,DC=fr",
+                    "3":"CN=africes,OU=Africe,OU=MARKETING,OU=company,DC=vpydio,DC=fr"
+                }
+                ,
+                "0":"memberof",
+                "samaccountname":
+                {
+                    "0":"w10s"
+                },
+                "1":"samaccountname",
+                "dn":"CN=w10s,CN=willaya10,CN=Alger,OU=algeria,OU=Africe,OU=MARKETING,OU=company,DC=vpydio,DC=fr"
+            }
+            ]
+         */
+        $memberOfs = $groupData[strtolower($this->hasGroupsMapping)];
+        //$memberOf = $groupData[strtolower($this->hasGroupsMapping)][0];
+
 
         $this->ldapDN = $origUsersDN;
         $this->ldapFilter = $origUsersFilter;
         $this->ldapUserAttr = $origUsersAttr;
 
-        if (!empty($memberOf)) {
-            $parts = explode(",", ltrim($memberOf, '/'));
-            foreach ($parts as $part) {
-                list($att,$attVal) = explode("=", $part);
-                if(strtolower($att) == "cn")  $parentCN = $attVal;
-            }
-            if (!empty($parentCN)) {
-                $branch[] = $memberOf;
-                $this->buildGroupBranch($parentCN, $branch);
-            }
+        $this->logDebug(__FUNCTION__, "GroupData[]: " . json_encode($groupData));
 
+        if (!empty($memberOfs)) {
+
+            /*
+             * recursively build group branch for each memeber of $memberOfs
+             *
+             */
+            foreach ($memberOfs as $memberOf) {
+                if (!empty($memberOf)) {
+                    $this->logDebug(__FUNCTION__, "memberOf[]: " . json_encode($memberOf));
+                    $parts = explode(",", ltrim($memberOf, '/'));
+                    foreach ($parts as $part) {
+                        list($att, $attVal) = explode("=", $part);
+                        /*
+                         * In the example above, 1st CN indicates the name of group, from 2nd, CN indicate a container,
+                         * therefore, we just take the first "cn" element by breaking the for if we found.
+                         *
+                         */
+                        if (strtolower($att) == "cn") {
+                            $parentCN = $attVal;
+                            break;
+                        }
+                    }
+                    if (!empty($parentCN)) {
+                        $branch[] = $memberOf;
+                        $this->logDebug(__FUNCTION__,"branch[]: ".$branch);
+
+                        /*
+                         * recursive function call to look for more group deeply
+                         */
+                        $this->buildGroupBranch($parentCN, $branch);
+                    }
+                }
+            }  // foreach
         }
-
 
     }
 
     public function updateUserObject(&$userObject)
     {
+
+        parent::updateUserObject($userObject);
         if(!empty($this->separateGroup)) $userObject->setGroupPath("/".$this->separateGroup);
         // SHOULD BE DEPRECATED
         if (!empty($this->customParamsMapping)) {
@@ -557,26 +598,57 @@ class ldapAuthDriver extends AbstractAuthDriver
                     $key = strtolower($params['MAPPING_LDAP_PARAM']);
                     if (isSet($entry[$key])) {
                         $value = $entry[$key][0];
+
                         $memberValues = array();
+
                         if ($key == "memberof") {
                             // get CN from value
-                            foreach ($entry[$key] as $possibleValue) {
-                                $hnParts = array();
-                                $parts = explode(",", ltrim($possibleValue, '/'));
-                                foreach ($parts as $part) {
-                                    list($att,$attVal) = explode("=", $part);
-                                    if(strtolower($att) == "cn")  $hnParts[] = $attVal;
-                                }
-                                if (count($hnParts)) {
-                                    $memberValues[implode(",", $hnParts)] = $possibleValue;
-                                }
-                            }
+                                    foreach ($entry[$key] as $possibleValue) {
+                                        $hnParts = array();
+                                        $parts = explode(",", ltrim($possibleValue, '/'));
+                                        foreach ($parts as $part) {
+                                            list($att, $attVal) = explode("=", $part);
+
+                                            //if (strtolower($att) == "cn")  $hnParts[] = $attVal;
+
+                                            /*
+                                             * In the example above, 1st CN indicates the name of group, from 2nd, CN indicate a container,
+                                             * therefore, we just take the first "cn" element by breaking the for if we found.
+                                             *
+                                             */
+                                            if (strtolower($att) == "cn") {
+                                                $hnParts[] = $attVal;
+                                                break;
+                                            }
+                                        }
+                                        if (count($hnParts)) {
+                                            $memberValues[implode(",", $hnParts)] = $possibleValue;
+                                        }
+                                    }
                         }
                         switch ($params['MAPPING_LOCAL_TYPE']) {
                             case "role_id":
+                                $filter = $params["MAPPING_LOCAL_PARAM"];
+                                if (strpos($filter, "preg:") !== false) {
+                                    $matchFilter = "/".str_replace("preg:", "", $filter)."/i";
+                                } else if(!empty($filter)) {
+                                    $valueFilters = array_map("trim", explode(",", $filter));
+                                }
                                 if ($key == "memberof") {
                                     foreach ($memberValues as $uniqValue => $fullDN) {
                                         if (!in_array($uniqValue, array_keys($userObject->getRoles()))) {
+                                            if(isSet($matchFilter) && !preg_match($matchFilter, $uniqValue)) continue;
+                                            if(isSet($valueFilters) && !in_array($uniqValue, $valueFilters)) continue;
+                                            $userObject->addRole(AuthService::getRole($uniqValue, true));
+                                            $userObject->recomputeMergedRole();
+                                            $changes = true;
+                                        }
+                                    }
+                                } else {
+                                    foreach ($entry[$key] as $uniqValue) {
+                                        if(isSet($matchFilter) && !preg_match($matchFilter, $uniqValue)) continue;
+                                        if(isSet($valueFilters) && !in_array($uniqValue, $valueFilters)) continue;
+                                        if ((!in_array($uniqValue, array_keys($userObject->getRoles()))) && !empty($uniqValue)) {
                                             $userObject->addRole(AuthService::getRole($uniqValue, true));
                                             $userObject->recomputeMergedRole();
                                             $changes = true;
@@ -647,7 +719,6 @@ class ldapAuthDriver extends AbstractAuthDriver
             if ($changes) {
                 $userObject->save("superuser");
             }
-
         }
     }
 

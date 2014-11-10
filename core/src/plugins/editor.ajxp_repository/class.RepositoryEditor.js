@@ -36,6 +36,7 @@ Class.create("RepositoryEditor", AbstractEditor, {
         // INIT TAB
         var infoPane = this.element.down("#pane-infos");
         var metaPane = this.element.down("#pane-metas");
+        this.sharesPane = this.element.down("#pane-shares");
 
         var oElement = this.element;
         infoPane.setStyle({position:"relative"});
@@ -64,6 +65,16 @@ Class.create("RepositoryEditor", AbstractEditor, {
         return true;
     },
 
+    close: function($super){
+        if(this.sharesList){
+            this.sharesList.destroy();
+        }
+        if(this.sharesToolbar){
+            this.sharesToolbar.destroy();
+        }
+        $super();
+    },
+
     save : function(){
         if(!this.isDirty()) return;
 
@@ -81,8 +92,7 @@ Class.create("RepositoryEditor", AbstractEditor, {
             conn.onComplete = function(transport){
                 ajaxplorer.actionBar.parseXmlMessage(transport.responseXML);
                 this.loadRepository(this.repositoryId);
-                ajaxplorer.fireNodeRefresh(this.node);
-
+                ajaxplorer.fireContextRefresh();
                 this.setClean();
             }.bind(this);
             conn.sendAsync();
@@ -109,6 +119,49 @@ Class.create("RepositoryEditor", AbstractEditor, {
         this.node = node;
         this.formManager = this.getFormManager();
         this.loadRepository(this.repositoryId);
+
+        if(ajaxplorer.actionBar.getActionByName("share")){
+            var listPaneId = "shares-list-" + this.repositoryId;
+            // Create Actionbar with specific datamodel - should detect dm initialisation
+            var actionPane = this.sharesPane.down("#shares-toolbar");
+            var listPane = this.sharesPane.down("#shares-list");
+            listPane.setAttribute("id", listPaneId);
+
+
+            // Load list of shares
+            listPane.observe("editor:updateTitle", function(e){
+                Event.stop(e);
+            });
+            this.sharesList = new FetchedResultPane(listPane, {
+                nodeProviderProperties:{
+                    get_action:"sharelist-load",
+                    parent_repository_id:this.repositoryId,
+                    user_context:"global"
+                },
+                groupByData:2,
+                updateGlobalContext:false,
+                selectionChangeCallback:false,
+                displayMode: 'list',
+                fixedDisplayMode: 'list',
+                fit:"height"
+            });
+            listPane.removeClassName("class-FetchedResultPane");
+            listPane.addClassName("shares-list");
+            this.sharesList._dataLoaded = true;
+            this.sharesList.reloadDataModel();
+            this.sharesPane.resizeOnShow = function(){
+                this.sharesList.resize();
+            }.bind(this);
+
+            this.sharesToolbar = new ActionsToolbar(actionPane, {
+                toolbarsList:["share_list_toolbar-selection", "share_list_toolbar"],
+                skipBubbling:true,
+                skipCarousel:true,
+                submenuOffsetTop:2,
+                dataModelElementId:listPaneId
+            });
+        }
+
     },
 
     updateTitle: function(label){
@@ -194,7 +247,7 @@ Class.create("RepositoryEditor", AbstractEditor, {
             if(this.currentRepoWriteable){
                 this.feedMetaSourceForm(xmlData, this.metaPane);
             }else{
-                this.metaPane.update(MessageHash['ajxp_repository_editor.15']);
+                this.metaPane.down("div.dialogLegend").update(MessageHash['ajxp_repository_editor.15']);
             }
         }
 
@@ -283,9 +336,10 @@ Class.create("RepositoryEditor", AbstractEditor, {
             addForm.insert(formEl);
             addForm.insert('<div style="clear: both"></div>');
             formEl.insert(this.metaSelector);
-            metaPane.insert({top:addForm});
-            addForm.insert({before: new Element("div", {className:"dialogLegend"}).update(MessageHash["ajxp_repository_editor.7"])});
-            var addFormDetail = new Element("div");
+            new Chosen(this.metaSelector, {placeholder_text_single:'Add a feature to this workspace'});
+            metaPane.down("div.dialogLegend").update(MessageHash["ajxp_repository_editor.7"]);
+            metaPane.down("div.dialogLegend").insert({after:addForm});
+            var addFormDetail = new Element("div", {className:'meta_plugin_new_form empty'});
             addForm.insert(addFormDetail);
 
         }
@@ -293,19 +347,25 @@ Class.create("RepositoryEditor", AbstractEditor, {
         this.metaSelector.observe("change", function(){
             var plugId = this.metaSelector.getValue();
             addFormDetail.update("");
+            addFormDetail.addClassName("empty");
             if(plugId){
+                addFormDetail.removeClassName("empty");
                 var metaDefNodes = XPathSelectNodes(xmlData, 'admin_data/metasources/meta[@id="'+plugId+'"]/param');
                 var driverParamsHash = $A([]);
                 for(var i=0;i<metaDefNodes.length;i++){
                     driverParamsHash.push(this.formManager.parameterNodeToHash(metaDefNodes[i]));
                 }
-                this.formManager.createParametersInputs(addFormDetail, driverParamsHash, true, null, null, true);
-                this.formManager.disableShortcutsOnForm(addFormDetail);
+                if(driverParamsHash.length){
+                    this.formManager.createParametersInputs(addFormDetail, driverParamsHash, true, null, null, true);
+                    this.formManager.disableShortcutsOnForm(addFormDetail);
+                }else{
+                    addFormDetail.insert('<div class="meta_source_new_empty_params">No parameters for this plugin</div>')
+                }
 
             }
             modal.refreshDialogAppearance();
             modal.refreshDialogPosition();
-            addFormDetail.insert("<div class='largeButton' style='width:100px;margin-top: 20px;margin-left: 0; float: right;'><span class='icon-plus-sign'></span> <span>"+MessageHash['ajxp_repository_editor.11']+"</span></div>");
+            addFormDetail.insert("<div class='largeButton' id='meta_source_button_add'><span class='icon-plus-sign'></span> <span>"+MessageHash['ajxp_repository_editor.11']+"</span></div><div style='clear:both;'></div>");
             addFormDetail.down(".largeButton")._form = addForm;
             addFormDetail.down(".largeButton").observe("click", this.metaActionClick.bind(this));
             this.resize();

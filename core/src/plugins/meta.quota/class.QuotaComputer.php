@@ -26,7 +26,7 @@ defined('AJXP_EXEC') or die('Access not allowed');
  * @package AjaXplorer_Plugins
  * @subpackage Meta
  */
-class QuotaComputer extends AJXP_Plugin
+class QuotaComputer extends AJXP_AbstractMetaSource
 {
     /**
      * @var AbstractAccessDriver
@@ -41,14 +41,9 @@ class QuotaComputer extends AJXP_Plugin
      */
     protected $mailer;
 
-    public function initMeta($accessDriver)
-    {
-        $this->accessDriver = $accessDriver;
-    }
-
     protected function getWorkingPath()
     {
-        $repo = ConfService::getRepository();
+        $repo = $this->accessDriver->repository;
         $clearParent = null;
         // SPECIAL : QUOTA MUST BE COMPUTED ON PARENT REPOSITORY FOLDER
         if ($repo->hasParent()) {
@@ -128,19 +123,26 @@ class QuotaComputer extends AJXP_Plugin
         return;
     }
 
+    public function loadRepositoryInfo(&$data){
+        $data['meta.quota'] = array(
+            'usage' => $u = $this->getUsage($this->getWorkingPath()),
+            'total' => $this->getAuthorized()
+        );
+    }
+
     public function recomputeQuotaUsage($oldNode = null, $newNode = null, $copy = false)
     {
         $path = $this->getWorkingPath();
         $q = $this->computeDirSpace($path);
         $this->storeUsage($path, $q);
         $t = $this->getAuthorized();
-        AJXP_Controller::applyHook("msg.instant", array("<metaquota usage='{$q}' total='{$t}'/>", ConfService::getRepository()->getId()));
+        AJXP_Controller::applyHook("msg.instant", array("<metaquota usage='{$q}' total='{$t}'/>", $this->accessDriver->repository->getId()));
     }
 
     protected function storeUsage($dir, $quota)
     {
         $data = $this->getUserData();
-        $repo = ConfService::getRepository()->getId();
+        $repo = $this->accessDriver->repository->getId();
         if(!isset($data["REPO_USAGES"])) $data["REPO_USAGES"] = array();
         $data["REPO_USAGES"][$repo] = $quota;
         $this->saveUserData($data);
@@ -173,7 +175,7 @@ class QuotaComputer extends AJXP_Plugin
     private function getUsage($dir)
     {
         $data = $this->getUserData();
-        $repo = ConfService::getRepository()->getId();
+        $repo = $this->accessDriver->repository->getId();
         if (!isSet($data["REPO_USAGES"][$repo]) || $this->options["CACHE_QUOTA"] === false) {
             $quota = $this->computeDirSpace($dir);
             if(!isset($data["REPO_USAGES"])) $data["REPO_USAGES"] = array();
@@ -220,6 +222,27 @@ class QuotaComputer extends AJXP_Plugin
                 echo 'can not create object';
             }
         } else {
+            // Try to get quota via smbclient if accessDriver is smb.
+            if ($this->accessDriver->id == 'access.smb') {
+                $credential = AJXP_Safe::tryLoadingCredentialsFromSources("",$this->accessDriver->repository);
+                $strcmd = 'smbclient //'. $this->accessDriver->repository->options['HOST'] .'/' . $credential['user'] . ' -U ' . $credential['user'] . '%' . $credential['password'] . ' -c du';
+                $io = popen($strcmd, 'r');
+                $size = fgets($io, 4096);
+                $size = fgets($io, 4096);
+                $size = fgets($io, 4096);
+                $size = trim($size);
+
+                $num = explode(' ', $size);
+                if (!empty($num)) {
+                    pclose($io);
+                    $s = floatval(array_pop($num));
+                    return $s;
+                }
+                else{
+                    return 0;
+                }
+            }
+            
             if(PHP_OS == "Darwin") $option = "-sk";
             else $option = "-sb";
             $io = popen ( '/usr/bin/du '.$option.' ' . escapeshellarg($dir), 'r' );

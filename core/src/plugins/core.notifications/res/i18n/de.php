@@ -24,6 +24,10 @@ $mess=array(
 "3" => "Wichtige Nachrichten",
 "4" => "Benachrichtigungen",
 "5" => "Aktuelle Geschehen",
-"6" => "Go to ...",
-"7" => "Dismiss",
+"6" => "Gehe zu ...",
+"7" => "Verwerfen",
+"8" => "Kein Alarm",
+"9" => "Arbeitsumgebung Aktivitäten",
+"10" => "Ordner Aktivitäten",
+"11" => "Datei Aktivitäten",
 );

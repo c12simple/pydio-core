@@ -314,6 +314,25 @@ Class.create("AbstractEditor" , {
 		}
 		this.element.fire("editor:modified", isModified);
 	},
+
+    _supportsBrowserFullScreen:function(element){
+        return (element.requestFullScreen||element.webkitRequestFullScreen||element.mozRequestFullScreen);
+    },
+
+    _browserFullScreen: function (element) {
+        element.setStyle({width:'100%'});
+        element.select('#computer_fullscreen').invoke("remove");
+        if(element.requestFullScreen) {
+            element.requestFullScreen();
+        } else if(element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        } else if(element.mozRequestFullScreen){
+            element.mozRequestFullScreen();
+        } else {
+            return false;
+        }
+        return true;
+    },
 	/**
 	 * Switch to fullscreen mode
 	 */
@@ -321,7 +340,7 @@ Class.create("AbstractEditor" , {
 		if(!this.contentMainContainer){
 			this.contentMainContainer = this.element;
 		}
-		this.originalHeight = this.contentMainContainer.getHeight();	
+		this.originalHeight = this.contentMainContainer.getHeight();
 		this.originalWindowTitle = document.title;
         if(this.editorOptions.context.__className != "Modal"){
             this.originalParentId = this.element.parentNode.id;
@@ -336,7 +355,7 @@ Class.create("AbstractEditor" , {
 			left:0,
 			marginBottom:0,
 			backgroundColor:'#fff',
-			width:parseInt(document.viewport.getWidth())+'px',
+			width:'100%',
 			height:parseInt(document.viewport.getHeight())+"px",
 			zIndex:3000});
 		this.actions.get("fsButton").hide();
@@ -350,12 +369,27 @@ Class.create("AbstractEditor" , {
 		this.resize();
 		this.fullScreenMode = true;
 		this.element.fire("editor:enterFSend");
+        if(this._supportsBrowserFullScreen(this.element) && !this.element.down('#computer_fullscreen')){
+            var rightPos = this.editorOptions.floatingToolbar ? 10 : 100;
+            var button = new Element('span', {
+                id          :'computer_fullscreen',
+                className   :'icon-resize-full',
+                style       :'display: block; cursor:pointer; position:absolute; right:'+rightPos+'px; top:10px;color:white;font-size:15px;'
+            }).update('&nbsp;&nbsp;'+MessageHash[512]);
+            button.observe('click', function(){
+                this._browserFullScreen(this.element);
+            }.bind(this));
+            this.element.insert(button);
+        }
 	},
 	/**
 	 * Exits fullscreen mode
 	 */
 	exitFullScreen : function(){
 		if(!this.fullScreenMode) return;
+        if(this._supportsBrowserFullScreen(this.element) && this.element.down('#computer_fullscreen')){
+            this.element.down('#computer_fullscreen').remove();
+        }
 		this.element.fire("editor:exitFS");
 		Event.stopObserving(window, "resize", this.fullScreenListener);
         var dContent;

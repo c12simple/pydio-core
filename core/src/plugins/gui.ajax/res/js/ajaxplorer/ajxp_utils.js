@@ -250,6 +250,17 @@ function enableTextSelection(element){
     }
 }
 
+function moveCaretToEnd(el) {
+    if (typeof el.selectionStart == "number") {
+        el.selectionStart = el.selectionEnd = el.value.length;
+    } else if (typeof el.createTextRange != "undefined") {
+        el.focus();
+        var range = el.createTextRange();
+        range.collapse(false);
+        range.select();
+    }
+}
+
 function testStringWidth(text){
     var e = new Element('div',{id:'string_tester'});
     $$('body')[0].insert(e);
@@ -289,31 +300,39 @@ function fitRectangleToDimension(rectDim, targetDim){
 	return styleObj = {width:tW+'px', height:tH+'px', marginTop:mT+'px', marginBottom:mB+'px'};	
 }
 
-function fitHeightToBottom(element, parentElement, addMarginBottom, listen)
+function fitHeightToBottom(element, parentElement, addMarginBottom, listen, minOffsetTop)
 {	
 	element = $(element);
 	if(!element) return;
 	if(typeof(parentElement) == "undefined" || parentElement == null){
 		parentElement = Position.offsetParent($(element));
-	}else{
+	}else if(parentElement == "window") {
+        parentElement = window;
+    }else{
 		parentElement = $(parentElement);
 	}
+    if(!parentElement){
+        if(console) console.log('Warning, trying to fitHeightToBottom on null parent!', element.id);
+        return;
+    }
 	if(typeof(addMarginBottom) == "undefined" || addMarginBottom == null){
 		addMarginBottom = 0;
 	}
-    if(parentElement == "window") parentElement = window;
-		
+
 	var observer = function(){	
 		if(!element) return;	
-		var top =0;
+		var top = 0;
 		if(parentElement == window){
-			offset = element.cumulativeOffset();
+			var offset = element.cumulativeOffset();
 			top = offset.top;
 		}else{
-			offset1 = parentElement.cumulativeOffset();
-			offset2 = element.cumulativeOffset();
+			var offset1 = parentElement.cumulativeOffset();
+			var offset2 = element.cumulativeOffset();
 			top = offset2.top - offset1.top;
 		}
+        if(minOffsetTop) {
+            top = Math.max(top, minOffsetTop);
+        }
 		var wh;
 		if(parentElement == window){
 			wh = getViewPortHeight();
@@ -504,7 +523,7 @@ function getDomNodeText(node){
 		return a.join("");
 
 		case 2: // NODE_ATTRIBUTE
-		return node.nodeValue;
+		return node.value;
 		break;
 
 		case 3: // NODE_TEXT
@@ -794,4 +813,11 @@ function attachMobilTouchForClick(oElement, callback){
     } );
 
 
+}
+
+function bufferCallback(name, time, callback){
+    if(window[name]){
+        window.clearTimeout(window[name]);
+    }
+    window[name] = window.setTimeout(callback, time);
 }

@@ -55,8 +55,10 @@ Class.create("RemoteNodeProvider", {
 		conn.addParameter("options", "al");
 		var path = node.getPath();
 		// Double encode # character
+        var paginationHash;
 		if(node.getMetadata().get("paginationData")){
-			path += "%23" + node.getMetadata().get("paginationData").get("current");
+			paginationHash = "%23" + node.getMetadata().get("paginationData").get("current");
+            path += paginationHash;
             conn.addParameter("remote_order", "true");
             if(node.getMetadata().get("remote_order")){
                 node.getMetadata().get("remote_order").each(function(pair){
@@ -67,16 +69,18 @@ Class.create("RemoteNodeProvider", {
 		conn.addParameter("dir", path);
 		if(this.properties){
 			$H(this.properties).each(function(pair){
-				conn.addParameter(pair.key, pair.value);
+				conn.addParameter(pair.key, pair.value + (pair.key == 'dir' && paginationHash ? paginationHash :''));
 			});
 		}
 		conn.onComplete = function (transport){
-			try{				
+			//try{
 				this.parseNodes(node, transport, nodeCallback, childCallback);
-			}catch(e){
-				if(ajaxplorer) ajaxplorer.displayMessage('ERROR', 'Loading error :'+e.message);
+			/*}catch(e){
+                if(window.console) window.console.error(e);
+				else if(ajaxplorer) ajaxplorer.displayMessage('ERROR', 'Loading error :'+e.message);
 				else alert('Loading error :'+ e.message);
 			}
+			*/
 		}.bind(this);	
 		conn.sendAsync();
 	},
@@ -175,7 +179,7 @@ Class.create("RemoteNodeProvider", {
 		if(paginationNode){
 			var paginationData = new Hash();
 			$A(paginationNode.attributes).each(function(att){
-				paginationData.set(att.nodeName, att.nodeValue);
+				paginationData.set(att.nodeName, att.value);
 			}.bind(this));
 			origNode.getMetadata().set('paginationData', paginationData);
 		}else if(origNode.getMetadata().get('paginationData')){
@@ -228,9 +232,9 @@ Class.create("RemoteNodeProvider", {
 		var metadata = new Hash();
 		for(var i=0;i<xmlNode.attributes.length;i++)
 		{
-			metadata.set(xmlNode.attributes[i].nodeName, xmlNode.attributes[i].nodeValue);
+			metadata.set(xmlNode.attributes[i].nodeName, xmlNode.attributes[i].value);
 			if(Prototype.Browser.IE && xmlNode.attributes[i].nodeName == "ID"){
-				metadata.set("ajxp_sql_"+xmlNode.attributes[i].nodeName, xmlNode.attributes[i].nodeValue);
+				metadata.set("ajxp_sql_"+xmlNode.attributes[i].nodeName, xmlNode.attributes[i].value);
 			}
 		}
 		// BACKWARD COMPATIBILIY

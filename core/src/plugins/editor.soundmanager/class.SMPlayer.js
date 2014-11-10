@@ -28,7 +28,11 @@ if(!$$("html")[0].hasClassName("no-canvas") && !window.soundManager && ajaxplore
         if(ajaxplorer && ajaxplorer.user && ajaxplorer.user.getPreference("soundmanager.volume") !== undefined){
             soundManager.defaultOptions.volume = ajaxplorer.user.getPreference("soundmanager.volume");
         }
-        conn.loadLibrary('360-player/script/360player.js', function(){
+        var conn2 = new Connexion();
+        conn2._libUrl = (ajxpBootstrap.parameters.get('SERVER_PREFIX_URI')?ajxpBootstrap.parameters.get('SERVER_PREFIX_URI'):'')+'plugins/editor.soundmanager/sm/';
+        conn2.loadLibrary('360-player/script/360player.js', function(){
+
+            if(!window.threeSixtyPlayer) return;
 
             window.threeSixtyPlayer.config.scaleFont = (navigator.userAgent.match(/msie/i)?false:true);
             window.threeSixtyPlayer.config.showHMSTime = true;
@@ -123,7 +127,7 @@ function hookToFilesList(){
         $A(fList.getItems()).each(function(row){
             if(!row.ajxpNode || (row.ajxpNode.getAjxpMime() != "mp3" && row.ajxpNode.getAjxpMime() != "wav")) return;
             addVolumeButton();
-            var url = ajxpBootstrap.parameters.get('ajxpServerAccess')+'&get_action=audio_proxy&file='+base64_encode(row.ajxpNode.getPath())+ '&fake=extension.'+row.ajxpNode.getAjxpMime();
+            var url = ajxpBootstrap.parameters.get('ajxpServerAccess')+'&get_action=audio_proxy&file='+encodeURIComponent(base64_encode(row.ajxpNode.getPath()))+ '&fake=extension.'+row.ajxpNode.getAjxpMime();
             var player = new Element("div", {className:"ui360 ui360-micro"}).update(new Element("a", {href:url}).update(""));
             row.down("span#ajxp_label").setStyle({backgroundImage:'none'}).insert({top:player});
             threeSixtyPlayer.config.items = [player];
@@ -239,6 +243,9 @@ soundManager.setup({\n\
 
     },
 
+    getRESTPreviewLinks:function(node){
+        return {"MP3 Stream": "&file=" + encodeURIComponent(node.getPath())};
+    },
 
 	getPreview : function(ajxpNode, rich){
         if(!window.soundManager || !window.soundManager.enabled){
@@ -246,7 +253,7 @@ soundManager.setup({\n\
             return im;
         }
         addVolumeButton();
-        var url = ajxpBootstrap.parameters.get('ajxpServerAccess')+'&get_action=audio_proxy&file='+base64_encode(ajxpNode.getPath());
+        var url = ajxpBootstrap.parameters.get('ajxpServerAccess')+'&get_action=audio_proxy&file='+encodeURIComponent(base64_encode(ajxpNode.getPath()));
         if(rich){
             url += '&rich_preview=true&fake=extension.'+ajxpNode.getAjxpMime();
         }else{
@@ -258,7 +265,7 @@ soundManager.setup({\n\
         container.resizePreviewElement = function(element){
             if(rich){
                 player.setStyle({
-                    marginLeft:parseInt((element.width-256)/2)+24+"px",
+                    marginLeft:parseInt((element.width-256)/2)+9+"px",
                     marginTop:'-15px'
                 });
                 if(Prototype.Browser.IE) {

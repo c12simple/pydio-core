@@ -68,7 +68,7 @@ Class.create("Modal", {
             if(sIconClass){
                 hString = "<span class=\"titleString\"><span class='"+sIconClass+" ajxp_icon_span'></span>";
             }
-            closeBtn = '<span id="modalCloseBtn" class="icon-remove-sign" style="cursor:pointer;float:right;"></span>';
+            closeBtn = '<span id="modalCloseBtn" class="icon-remove" style="cursor:pointer;float:right;"></span>';
         }else{
             closeBtn = '<img id="modalCloseBtn" style="cursor:pointer;float:right;margin-top:2px;" src="'+ajxpResourcesFolder+'/images/actions/16/window_close.png" />';
         }
@@ -221,6 +221,9 @@ Class.create("Modal", {
 	 * @param boxWidth String Width in pixel or in percent
 	 * @param boxHeight String Height in pixel or in percent
 	 * @param skipShadow Boolean Do not add a shadow
+     * @param boxAutoResize Boolean whether box should be resized on window resize event
+     * @param overlayStyle String additional CSS string to be applied to overlay element
+     * @param formId String If this id is not null, dialog will have the class form-formId
 	 */
 	showContent: function(elementName, boxWidth, boxHeight, skipShadow, boxAutoResize, overlayStyle, formId){
 		ajaxplorer.disableShortcuts();
@@ -232,6 +235,10 @@ Class.create("Modal", {
 		this.currentListensToWidth = false;
 		this.currentListensToHeight = false;
 		// WIDTH / HEIGHT
+        $(elementName).setStyle({
+            width:'auto',
+            height:'auto'
+        });
 		if(boxWidth != null){
 			if(boxWidth.indexOf("%") ==-1 && parseInt(boxWidth) > winWidth){
 				boxWidth = '90%';
@@ -251,11 +258,8 @@ Class.create("Modal", {
 			}
 			$(elementName).setStyle({height:boxHeight+'px'});
 		}else{
-			//if (Prototype.Browser.IE){
-				//$(elementName).setStyle({height:'1%'});
-			//}else{
-				$(elementName).setStyle({height:'auto'});
-			//}
+            $(elementName).setStyle({height:'auto'});
+            $(elementName).down('.dialogContent').setStyle({height:'auto'});
 		}
 		this.refreshDialogPosition();
 		if(boxAutoResize && (this.currentListensToWidth || this.currentListensToHeight) ){
@@ -267,8 +271,9 @@ Class.create("Modal", {
 				}
 				if(this.currentListensToHeight){
 					var winHeight = document.viewport.getHeight();
-					boxH = parseInt((winHeight * this.currentListensToHeight) / 100);
+					var boxH = parseInt((winHeight * this.currentListensToHeight) / 100);
 					$(elementName).setStyle({height:boxH+'px'});
+                    fitHeightToBottom($(elementName).down('.dialogContent'));
 				}
 				this.notify("modal:resize");
 			}.bind(this);
@@ -294,10 +299,13 @@ Class.create("Modal", {
 			refreshPNGImages(this.dialogContent);			
 		}
 
+        if(this.currentResizeListener) this.currentResizeListener();
+
 	},
 	/**
 	 * Find an editor using the editorData and initialize it
 	 * @param editorData Object
+     * @param editorArgument Object
 	 */
 	openEditorDialog : function(editorData, editorArgument){
 		if(!editorData.formId){
@@ -352,10 +360,10 @@ Class.create("Modal", {
             $(element).down("#element_overlay").insert({after:box});
             $(element).down("#element_overlay").setStyle({opacity:0.9});
             if(element.up('div.dialogBox')){
-                Effect.BlindDown(box, {
-                    duration:0.6,
-                    transition:Effect.Transitions.sinoidal
-                });
+                //Effect.BlindDown(box, {
+                //    duration:0.6,
+                //    transition:Effect.Transitions.sinoidal
+                //});
             }
         }
         this.currentLightBoxElement = $(element);
@@ -422,18 +430,37 @@ Class.create("Modal", {
 	getForm: function()	{
 		return this.currentForm;
 	},
-	/**
+
+    _dialogPositionRefreshBuffer: null,
+    /**
+     * Refresh position after a window change
+     * @param checkHeight Boolean
+     * @param elementToScroll HTMLElement
+     */
+    refreshDialogPosition: function(checkHeight, elementToScroll){
+        if(this._dialogPositionRefreshBuffer){
+            window.clearTimeout(this._dialogPositionRefreshBuffer);
+        }
+        this._dialogPositionRefreshBuffer = window.setTimeout(function(){
+            this._bufferedRefreshDialogPosition(checkHeight, elementToScroll);
+        }.bind(this), 200);
+    },
+    /**
 	 * Refresh position after a window change
+     * Used internally by the public function to buffer multiple calls
 	 * @param checkHeight Boolean
 	 * @param elementToScroll HTMLElement
 	 */
-	refreshDialogPosition: function(checkHeight, elementToScroll){
+    _bufferedRefreshDialogPosition: function(checkHeight, elementToScroll){
 		var winWidth = document.viewport.getWidth();
 		var winHeight = document.viewport.getHeight();
         var element = $(this.elementName);
 		var boxWidth = element.getWidth();
 		var boxHeight = element.getHeight();
-		
+        var dContent = element.down('.dialogContent');
+        var dContentScrollHeight = dContent.scrollHeight;
+        var dTitle = element.down('.dialogTitle');
+
 		if(checkHeight && boxHeight > parseInt(winHeight*90/100)){
 			var maxHeight = parseInt(winHeight*90/100);
 			var crtScrollHeight = elementToScroll.getHeight();
@@ -442,10 +469,26 @@ Class.create("Modal", {
 				elementToScroll.setStyle({
 					overflow:'auto',
 					height:(maxHeight-crtOffset)+'px'
-				});		
+				});
+                if (window.ajxpMobile){
+                    attachMobileScroll(dContent, "vertical");
+                }
 				boxHeight = element.getHeight();
 			}
-		}
+		}else if(!checkHeight && dContentScrollHeight > winHeight){
+            dContent.setStyle({
+                height:(winHeight- parseInt(dTitle.getHeight()) - 20)+'px',
+                overflow:'auto'
+            });
+            if (window.ajxpMobile){
+                attachMobileScroll(dContent, "vertical");
+            }
+            boxHeight = element.getHeight();
+        }else if(dContentScrollHeight >= dContent.getHeight() && !this.currentListensToHeight){
+            dContent.setStyle({height: 'auto'});
+            boxHeight = element.getHeight();
+        }
+
 		var offsetLeft = parseInt((winWidth - parseInt(boxWidth)) / 2);
 		var offsetTop = parseInt(((winHeight - parseInt(boxHeight))/3));
         
@@ -575,7 +618,7 @@ Class.create("Modal", {
             }
             var y = baseY+10;
             if(position.indexOf('middle') != -1){
-                y -= 5 + parseInt(this.tooltip.getHeight())/2;
+                y -= 10 + parseInt(this.tooltip.getHeight())/2 - parseInt(element.getHeight())/2 ;
             }else if(position.indexOf('bottom') != -1){
                 y -= 13 + parseInt(element.getHeight());
             }else if(position.indexOf('top') != -1){
@@ -590,7 +633,7 @@ Class.create("Modal", {
                     this.tooltip.addClassName("arrow_tip_arrow_left");
                 }
             }else if(position.indexOf('right') != -1){
-                x = baseX + 10;
+                x = baseX + 10 + parseInt(element.getWidth());
             }else{
                 x = (baseX - 10 - parseInt(this.tooltip.getWidth()));
             }
@@ -695,16 +738,13 @@ Class.create("Modal", {
 	updateLoadingProgress: function(state){
 		this.loadingStep --;
 		var percent = (1 - (this.loadingStep / this.loadingStepsCount));
-		if(window.loaderProgress){
-			window.loaderProgress.setPercentage(parseFloat(percent)*100, true);
-		}
+        document.fire("ajaxplorer:loader_state_update", {percent:parseFloat(percent)});
 		if(state && $('progressState')){
 			$('progressState').update(state);
 		}
 		if(this.loadingStep == 0){
 			this.pageLoading = false;
 		}
-		return;
 	},
 	/**
 	 * Callback to be called on close

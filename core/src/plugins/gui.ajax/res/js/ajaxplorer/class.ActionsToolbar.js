@@ -21,22 +21,25 @@
 /**
  * Toolbar to display actions buttons
  */
-Class.create("ActionsToolbar", {
+Class.create("ActionsToolbar", AjxpPane, {
 	__implements : "IAjxpWidget",
 	/**
 	 * Constructor
 	 * @param oElement Element The dom node
 	 * @param options Object The toolbar options. Contains a buttonRenderer and a toolbarsList array.
 	 */
-	initialize : function(oElement, options){
+	initialize : function($super, oElement, options){
+        $super(oElement, options);
 		this.element = oElement;		
 		this.element.ajxpPaneObject = this;
 		this.options = Object.extend({
 			buttonRenderer : 'this',
-            skipBubbling: false,
+            skipBubbling: true,
 			toolbarsList : $A(['default', 'put', 'get', 'change', 'user', 'remote']),
             groupOtherToolbars : $A([]),
-            skipCarousel : false
+            skipCarousel : true,
+            manager:null,
+            dataModelElementId:null
 		}, options || {});
 		var renderer = this.options.buttonRenderer;
 		if(renderer == 'this'){
@@ -71,8 +74,20 @@ Class.create("ActionsToolbar", {
             }
         }.bind(this);
 
-        document.observe("ajaxplorer:actions_loaded", this.actionsLoadedObserver);
-        document.observe("ajaxplorer:actions_refreshed", this.refreshToolbarObserver);
+        if(this.options.manager){
+            this.options.manager.observe("actions_loaded", this.actionsLoadedObserver);
+            this.options.manager.observe("actions_refreshed", this.refreshToolbarObserver);
+
+        }else if(this.options.dataModelElementId){
+            this.options.manager = new ActionsManager(true, this.options.dataModelElementId);
+            this.options.manager.observe("actions_loaded", this.actionsLoadedObserver);
+            this.options.manager.observe("actions_refreshed", this.refreshToolbarObserver);
+            // May be already loaded
+            this.actionsLoaded();
+        }else{
+            document.observe("ajaxplorer:actions_loaded", this.actionsLoadedObserver);
+            document.observe("ajaxplorer:actions_refreshed", this.refreshToolbarObserver);
+        }
         document.observe("ajaxplorer:component_config_changed", this.componentConfigHandler );
 
 	},
@@ -82,8 +97,14 @@ Class.create("ActionsToolbar", {
 	},
 	destroy : function(){
 		this.emptyToolbars();
-        document.stopObserving("ajaxplorer:actions_loaded", this.actionsLoadedObserver);
-        document.stopObserving("ajaxplorer:actions_refreshed", this.refreshToolbarObserver);
+        if(this.options.manager){
+            this.options.manager.stopObserving("actions_loaded", this.actionsLoadedObserver);
+            this.options.manager.stopObserving("actions_refreshed", this.refreshToolbarObserver);
+            this.options.manager.destroy();
+        }else{
+            document.stopObserving("ajaxplorer:actions_loaded", this.actionsLoadedObserver);
+            document.stopObserving("ajaxplorer:actions_refreshed", this.refreshToolbarObserver);
+        }
         document.stopObserving("ajaxplorer:component_config_changed", this.componentConfigHandler );
         if(this.styleObserver) document.stopObserving("ajaxplorer:user_logged", this.styleObserver);
 	},
@@ -109,9 +130,15 @@ Class.create("ActionsToolbar", {
 	 * @param event Event ajaxplorer:actions_loaded
 	 */
 	actionsLoaded : function(event) {
-		this.actions = event.memo;
+        if(event && event.memo) {
+            this.actions = event.memo;
+        } else if(this.options.manager) {
+            this.actions = this.options.manager.actions;
+        }
 		this.emptyToolbars();
-		this.initToolbars();
+        if(this.actions){
+            this.initToolbars();
+        }
 	},
 	
 	/**
@@ -165,7 +192,7 @@ Class.create("ActionsToolbar", {
                 selection:false,
                 dir:true,
                 actionBar:true,
-                actionBarGroup:'put',
+                actionBarGroup:'get',
                 contextMenu:false,
                 infoPanel:false
 
@@ -366,7 +393,18 @@ Class.create("ActionsToolbar", {
         if(!this.options.skipBubbling){
             img.setStyle("width:18px;height:18px;margin-top:8px;");
         }
-		button.hide();
+        button.hideButton = function(){
+            this.hide();
+            this.removeClassName("action_visible");
+            this.addClassName("action_hidden");
+        }.bind(button);
+        button.showButton = function(){
+            this.show();
+            this.removeClassName("action_hidden");
+            this.addClassName("action_visible");
+        }.bind(button);
+
+		button.hideButton();
 		this.attachListeners(button, action);
         if(!this.registeredButtons){
             this.registeredButtons = $A();
@@ -375,7 +413,7 @@ Class.create("ActionsToolbar", {
 		return button;
 		
 	},
-	
+
 	/**
 	 * Attach various listeners to an action to reflect its state on the button
 	 * @param button HTMLElement The button
@@ -389,9 +427,9 @@ Class.create("ActionsToolbar", {
             fakeDm.setSelectedNodes([this.options.attachToNode]);
             action.fireSelectionChange(fakeDm);
             if(action.deny) {
-                button.hide();
+                button.hideButton();
             }  else {
-                button.show();
+                button.showButton();
             }
             button.ACTION = action;
             return;
@@ -399,8 +437,8 @@ Class.create("ActionsToolbar", {
 
 
         button.OBSERVERS = $H();
-        button.OBSERVERS.set("hide", function(){button.hide()}.bind(this));
-        button.OBSERVERS.set("show", function(){button.show()}.bind(this));
+        button.OBSERVERS.set("hide", function(){button.hideButton()}.bind(this));
+        button.OBSERVERS.set("show", function(){button.showButton()}.bind(this));
 
         button.OBSERVERS.each(function(pair){
             action.observe(pair.key, pair.value);
@@ -408,10 +446,10 @@ Class.create("ActionsToolbar", {
         button.ACTION = action;
 
 		action.observe("hide", function(){
-			button.hide();
+			button.hideButton();
 		}.bind(this));
 		action.observe("show", function(){
-			button.show();
+			button.showButton();
 		}.bind(this));
 		action.observe("disable", function(){
 			button.addClassName("disabled");
@@ -604,7 +642,8 @@ Class.create("ActionsToolbar", {
 	/**
 	 * Resize the widget. May trigger the apparition/disparition of the Carousel buttons.
 	 */
-	resize : function(){
+	resize : function($super){
+        $super();
         if(this.options.skipCarousel) {
             return;
         }

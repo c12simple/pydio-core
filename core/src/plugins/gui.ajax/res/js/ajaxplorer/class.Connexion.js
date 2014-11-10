@@ -17,7 +17,7 @@
  *
  * The latest code can be found at <http://pyd.io/>.
  */
-
+var PydioLog = $A();
 /**
  * Pydio encapsulation of Ajax.Request
  */
@@ -108,7 +108,11 @@ Class.create("Connexion", {
 	/**
 	 * Send Asynchronously
 	 */
-	sendAsync : function(){	
+	sendAsync : function(){
+        PydioLog.push({
+            action:this._parameters.get("get_action"),
+            type:"async"
+        });
 		this.addSecureToken();
         this.showLoader();
 		var t = new Ajax.Request(this._baseUrl,
@@ -123,7 +127,11 @@ Class.create("Connexion", {
 	/**
 	 * Send synchronously
 	 */
-	sendSync : function(){	
+	sendSync : function(){
+        PydioLog.push({
+            action:this._parameters.get("get_action"),
+            type:"sync"
+        });
 		this.addSecureToken();
         this.showLoader();
 		var t = new Ajax.Request(this._baseUrl,
@@ -205,8 +213,9 @@ Class.create("Connexion", {
 	 * Load a javascript library
 	 * @param fileName String
 	 * @param onLoadedCode Function Callback
+     * @param aSync Boolean load library asynchroneously
 	 */
-	loadLibrary : function(fileName, onLoadedCode){
+	loadLibrary : function(fileName, onLoadedCode, aSync){
         if(window.ajxpBootstrap && window.ajxpBootstrap.parameters.get("ajxpVersion") && fileName.indexOf("?")==-1){
             fileName += "?v="+window.ajxpBootstrap.parameters.get("ajxpVersion");
         }
@@ -214,7 +223,7 @@ Class.create("Connexion", {
 		new Ajax.Request(path,
 		{
 			method:'get',
-			asynchronous: false,
+			asynchronous: (aSync?true:false),
 			onComplete:function(transport){
 				if(transport.responseText) 
 				{

@@ -258,14 +258,23 @@ SelectableElements = Class.create({
 			if(!this.skipScroll){
 				// CHECK THAT SCROLLING IS OK
 				var parent = this._htmlElement;
-				if(this._htmlElement.up('.table_rows_container')) {
+                if(this._htmlElement.up('.table_rows_container')) {
                     parent = this._htmlElement.up('.table_rows_container');
                 }
-				var scrollOffset = oEl.offsetTop;
-				
-				var parentHeight = parent.getHeight();
-				var parentScrollTop = parent.scrollTop;
-				var elHeight = $(oEl).getHeight(); 
+                var direction = 'offsetTop';
+                var dimMethod = 'getHeight';
+                var scrollDir = 'scrollTop';
+                if(this.options && this.options.horizontalScroll){
+                    parent = $(parent.parentNode);
+                    direction = 'offsetLeft';
+                    dimMethod = 'getWidth';
+                    scrollDir = 'scrollLeft';
+                }
+
+				var scrollOffset = oEl[direction];
+				var parentHeight = parent[dimMethod]();
+				var parentScrollTop = parent[scrollDir];
+				var elHeight = $(oEl)[dimMethod]();
 
                 var sTop = -1;
 				if(scrollOffset+elHeight > (parentHeight+parentScrollTop)){			
@@ -277,7 +286,7 @@ SelectableElements = Class.create({
                     if(parent.scrollerInstance){
                         parent.scrollerInstance.scrollTo(sTop);
                     }else{
-                        parent.scrollTop = sTop;
+                        parent[scrollDir] = sTop;
                     }
                 }
 			}
@@ -367,7 +376,7 @@ SelectableElements = Class.create({
     previousEventTarget: null,
     ie10detailFilter : function(e){
         if(!Prototype.Browser.IE10){
-            return true;
+            return false;
         }
         var result = true;
         if(!this.previousEventTime){
@@ -400,9 +409,7 @@ SelectableElements = Class.create({
 		var selectedBefore = this.getSelectedItems();	// is a cloned array
 	
 		// find row
-		var el = e.target != null ? e.target : e.srcElement;
-		while (el != null && !this.isItem(el))
-			el = el.parentNode;
+        var el = Event.findElement(e, ".ajxpNodeProvider");
 	
 		if (el == null) {	// happens in IE when down and up occur on different items
 			this._fireChange = oldFireChange;
@@ -533,7 +540,7 @@ SelectableElements = Class.create({
 	},
 	
 	isItem: function (node) {
-		return node != null && node.nodeType == 1 && node.parentNode == this._htmlElement;
+		return node != null && node.up('#' + this._htmlElement.id);
 	},
 	
 	findSelectableParent : function(el, setSelected){
@@ -547,6 +554,8 @@ SelectableElements = Class.create({
 	},
 	
 	destroy: function () {
+        if(!this._htmlElement) return;
+
 		if (this._htmlElement.removeEventListener)
 			this._htmlElement.removeEventListener("click", this._onclick, false);
 		else if (this._htmlElement.detachEvent)
@@ -590,7 +599,7 @@ SelectableElements = Class.create({
 	getItems: function () {
 		var tmp = [];
 		var j = 0;
-		var cs = this._htmlElement.childNodes;
+		var cs = this._htmlElement.select('.ajxpNodeProvider');
 		var l = cs.length;
 		for (var i = 0; i < l; i++) {
 			if (cs[i].nodeType == 1)
@@ -601,7 +610,7 @@ SelectableElements = Class.create({
 	
 	getItem: function (nIndex) {
 		var j = 0;
-		var cs = this._htmlElement.childNodes;
+		var cs = this._htmlElement.select('.ajxpNodeProvider');
 		var l = cs.length;
 		for (var i = 0; i < l; i++) {
 			if (cs[i].nodeType == 1) {
@@ -625,7 +634,7 @@ SelectableElements = Class.create({
 	
 	getItemIndex: function (el) {
 		var j = 0;
-		var cs = this._htmlElement.childNodes;
+		var cs = this._htmlElement.select('.ajxpNodeProvider');
 		var l = cs.length;
 		for (var i = 0; i < l; i++) {
 			if (cs[i] == el)

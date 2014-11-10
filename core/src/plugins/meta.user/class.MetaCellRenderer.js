@@ -48,11 +48,13 @@ Class.create("MetaCellRenderer", {
         }
         if(!MetaCellRenderer.staticMetadataCache.get(metadataDef.attributeName)){
             var values = {};
-            metadataDef['metaAdditional'].split(",").each(function(keyLabel){
-                var parts = keyLabel.split("|");
-                values[parts[0]] = parts[1];
-            });
-            MetaCellRenderer.staticMetadataCache.set(metadataDef.attributeName, values);
+            if(metadataDef['metaAdditional']){
+                metadataDef['metaAdditional'].split(",").each(function(keyLabel){
+                    var parts = keyLabel.split("|");
+                    values[parts[0]] = parts[1];
+                });
+                MetaCellRenderer.staticMetadataCache.set(metadataDef.attributeName, values);
+            }
         }
         var values = MetaCellRenderer.staticMetadataCache.get(metadataDef.attributeName);
         if((type == 'row' || type == 'detail') && element != null){
@@ -224,16 +226,19 @@ Class.create("MetaCellRenderer", {
                     }
                 break;
                 case "text":
+                case "string":
                 case "textarea":
+                    /*
                     if(typeof td.contentEditable != 'undefined'){
                         enableTextSelection(td);
                         var editableDiv = new Element("div", {
                             contentEditable:"true",
                             title : "Click to edit inline",
-                            style:"min-height:16px;float:left;width:86%;cursor:pointer;"}).update(td.innerHTML);
+                            style:"padding:2px;border:1px solid #bbb; border-radius:2px;"}).update(td.innerHTML);
                         td.update(editableDiv);
                         obj.linkEditableDiv(editableDiv);
-                    }
+                    }*/
+                    if(!td.innerHTML) td.update(MessageHash['meta.user.9']);
                 break;
                 default:
                 break;
@@ -260,6 +265,7 @@ Class.create("MetaCellRenderer", {
                 get_action  : 'edit_user_meta',
                 file	    : selectedNode.getPath()
             }));
+            var id = div.up("div").id.substring(3);
             conn.addParameter(id, div.textContent);
             conn.onComplete = function(){
                 div.saver.remove();
@@ -271,7 +277,7 @@ Class.create("MetaCellRenderer", {
 
         div.observe("focus", function(event){
             var source = event.target;
-            id = source.up("td").id.substring(3);
+            var id = source.up("div").id.substring(3);
             source.insert({after:source.saver});
             ajaxplorer.disableAllKeyBindings();
             window.setTimeout(function(){

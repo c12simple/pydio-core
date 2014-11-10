@@ -149,8 +149,8 @@ Class.create("UserWidget", {
 				position: 'bottom right',
 				anchor:this.element,
 				createAnchor:false,
-				topOffset:2,
-				leftOffset:-3,
+				topOffset: (this.options.menuOffsetTop ? this.options.menuOffsetTop  : 2),
+				leftOffset:(this.options.menuOffsetLeft? this.options.menuOffsetLeft :-3),
 				menuItems: menuItems,
                 menuTitle: MessageHash[511].replace('%s', ajaxplorer.getPluginConfigs("ajaxplorer").get("APPLICATION_TITLE")),
                 detailedItems: true,
@@ -202,7 +202,10 @@ Class.create("UserWidget", {
 		document.stopObserving("ajaxplorer:actions_loaded", this.actLoaded );		
 		if(Prototype.Browser.IE) {
 			document.stopObserving("ajaxplorer:actions_refreshed", this.actLoaded );
-		}		
+		}
+        if(this.menu){
+            this.menu.destroy();
+        }
 		this.element = null;
 	}
 	

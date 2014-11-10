@@ -166,7 +166,7 @@ Class.create("RoleEditor", AbstractEditor, {
                 if(this.roleData.USER)response.USER = this.roleData.USER;
                 if(this.roleData.GROUP)response.GROUP = this.roleData.GROUP;
                 this.initJSONResponse(response);
-                ajaxplorer.fireNodeRefresh(this.node);
+                ajaxplorer.fireContextRefresh();
                 this.setClean();
             }else{
                 ajaxplorer.displayMessage("ERROR", response.ERROR);
@@ -319,7 +319,7 @@ Class.create("RoleEditor", AbstractEditor, {
             buttonPane.insert(b0);
             var userId = this.roleId.replace("AJXP_USR_/", "");
             b0.observe("click", function(){
-                var pane = new Element("div", {style:"width:300px;"});
+                var pane = new Element("div", {style:"width:400px;"});
                 pane.insert(new Element("div", {className:"dialogLegend"}).update(MessageHash["ajxp_role_editor.29"]));
                 var passEl1 = new Element("div", {className:"SF_element"});
                 passEl1.insert(new Element("div",{className:"SF_label"}).update(MessageHash[182]+": "));
@@ -671,7 +671,7 @@ Class.create("RoleEditor", AbstractEditor, {
         if(!Object.keys(actionsData).length){
             parametersPane.update("");
             parametersPane.removeClassName("nonempty");
-            parametersPane.insert(new Element("ul", {className:"tabrow"}));
+            parametersPane.insert(new Element("ul", {className:"tabrow innerTabRow"}));
             return;
         }
         var conn = new Connexion();
@@ -684,7 +684,7 @@ Class.create("RoleEditor", AbstractEditor, {
 
             parametersPane.update("");
             parametersPane.removeClassName("non_empty");
-            parametersPane.insert(new Element("ul", {className:"tabrow"}));
+            parametersPane.insert(new Element("ul", {className:"tabrow innerTabRow"}));
 
             // Parse result as a standard form
             var xml = transport.responseXML;
@@ -723,7 +723,9 @@ Class.create("RoleEditor", AbstractEditor, {
                         h.set("label", '<span class="inherited">' + h.get("label") + ' ('+ MessageHash["ajxp_role_editor.38"] +')' + '</span>');
                     }
                 }
-                formManager.createParametersInputs(pane, formParams, true, null, false, false, false);
+                var formElement = new Element('form', {style:'display:inline;'});
+                pane.insert(formElement);
+                formManager.createParametersInputs(formElement, formParams, true, null, false, false, false);
                 if(pane.SF_accordion){
                     pane.SF_accordion.openAll();
                 }
@@ -732,6 +734,7 @@ Class.create("RoleEditor", AbstractEditor, {
             pane.select("div.accordion_content").invoke("setStyle", {display:"block"});
             new AjxpSimpleTabs(parametersPane);
             parametersPane.addClassName("non_empty");
+            parametersPane.down(".tabpanes").addClassName("innerContainer").setStyle({margin:'3px 10px'});
 
             // UPDATE FORMS ELEMENTS
             parametersPane.select("div.SF_element").each(function(element){

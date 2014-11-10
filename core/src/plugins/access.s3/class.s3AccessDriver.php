@@ -21,6 +21,8 @@
  */
 
 defined('AJXP_EXEC') or die( 'Access not allowed');
+use Aws\S3\S3Client;
+use Guzzle\Plugin\Log\LogPlugin;
 
 /**
  * AJXP_Plugin to access a webdav enabled server
@@ -36,27 +38,45 @@ class s3AccessDriver extends fsAccessDriver
     public $driverConf;
     protected $wrapperClassName;
     protected $urlBase;
+    protected $s3Client;
 
     public function performChecks()
     {
         // Check CURL, OPENSSL & AWS LIBRARY
         if(!extension_loaded("curl")) throw new Exception("Cannot find php_curl extension!");
-        if(!extension_loaded("openssl")) throw new Exception("Cannot find openssl extension!");
-        if(!file_exists($this->getBaseDir()."/aws-sdk/sdk.class.php")) throw new Exception("Cannot find AWS PHP SDK. Make sure it is installed in the aws-sdk folder.");
-       }
+        if(!file_exists($this->getBaseDir()."/aws.phar")) throw new Exception("Cannot find AWS PHP SDK v2. Make sure the aws.phar package is installed inside access.s3 plugin.");
+    }
 
+    /**
+     * @param bool $register
+     * @return array|bool|void
+     * Override parent to register underlying wrapper (s3) as well
+     */
+    public function detectStreamWrapper($register = false){
+
+        if(isSet($this->repository)){
+            require_once("aws.phar");
+            $options = array(
+                'key'    => $this->repository->getOption("API_KEY"),
+                'secret' => $this->repository->getOption("SECRET_KEY")
+            );
+            $baseURL = $this->repository->getOption("STORAGE_URL");
+            if(!empty($baseURL)){
+                $options["base_url"] = $baseURL;
+            }else{
+                $options["region"] = $this->repository->getOption("REGION");
+            }
+            $this->s3Client = S3Client::factory($options);
+            $this->s3Client->registerStreamWrapper();
+            //$this->s3Client->addSubscriber(LogPlugin::getDebugPlugin());
+        }
+
+        return parent::detectStreamWrapper($register);
+    }
 
     public function initRepository()
     {
-        require_once($this->getBaseDir()."/aS3StreamWrapper/lib/wrapper/aS3StreamWrapper.class.php");
-        if (!in_array("s3", stream_get_wrappers())) {
-            $wrapper = new aS3StreamWrapper();
-            $wrapper->register(array('protocol' => 's3',
-                  'acl' => AmazonS3::ACL_OWNER_FULL_CONTROL,
-                  'key' => $this->repository->getOption("API_KEY"),
-                  'secretKey' => $this->repository->getOption("SECRET_KEY"),
-                  'region' => $this->repository->getOption("REGION")));
-        }
+        $wrapperData = $this->detectStreamWrapper(true);
 
         if (is_array($this->pluginConf)) {
             $this->driverConf = $this->pluginConf;
@@ -64,15 +84,17 @@ class s3AccessDriver extends fsAccessDriver
             $this->driverConf = array();
         }
 
-        $path = $this->repository->getOption("PATH");
         $recycle = $this->repository->getOption("RECYCLE_BIN");
         ConfService::setConf("PROBE_REAL_SIZE", false);
-        $wrapperData = $this->detectStreamWrapper(true);
         $this->wrapperClassName = $wrapperData["classname"];
         $this->urlBase = $wrapperData["protocol"]."://".$this->repository->getId();
         if ($recycle != "") {
             RecycleBinManager::init($this->urlBase, "/".$recycle);
         }
+    }
+
+    public function getS3Service(){
+        return $this->s3Client;
     }
 
     /**
@@ -87,6 +109,11 @@ class s3AccessDriver extends fsAccessDriver
     }
 
     public function isWriteable($dir, $type="dir")
+    {
+        return true;
+    }
+
+    public static function isRemote()
     {
         return true;
     }

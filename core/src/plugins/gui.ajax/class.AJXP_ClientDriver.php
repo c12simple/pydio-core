@@ -110,38 +110,6 @@ class AJXP_ClientDriver extends AJXP_Plugin
             break;
 
             //------------------------------------
-            //	SEND XML REGISTRY
-            //------------------------------------
-            case "get_xml_registry" :
-
-                $regDoc = AJXP_PluginsService::getXmlRegistry();
-                $changes = AJXP_Controller::filterRegistryFromRole($regDoc);
-                if($changes) AJXP_PluginsService::updateXmlRegistry($regDoc);
-
-                $clone = $regDoc->cloneNode(true);
-                $clonePath = new DOMXPath($clone);
-                $serverCallbacks = $clonePath->query("//serverCallback|hooks");
-                foreach ($serverCallbacks as $callback) {
-                    $processing = $callback->parentNode->removeChild($callback);
-                }
-
-                if (isSet($_GET["xPath"])) {
-                    //$regPath = new DOMXPath($regDoc);
-                    $nodes = $clonePath->query($_GET["xPath"]);
-                    AJXP_XMLWriter::header("ajxp_registry_part", array("xPath"=>$_GET["xPath"]));
-                    if ($nodes->length) {
-                        print(AJXP_XMLWriter::replaceAjxpXmlKeywords($clone->saveXML($nodes->item(0))));
-                    }
-                    AJXP_XMLWriter::close("ajxp_registry_part");
-                } else {
-                    AJXP_Utils::safeIniSet("zlib.output_compression", "4096");
-                    header('Content-Type: application/xml; charset=UTF-8');
-                    print(AJXP_XMLWriter::replaceAjxpXmlKeywords($clone->saveXML()));
-                }
-
-            break;
-
-            //------------------------------------
             //	DISPLAY DOC
             //------------------------------------
             case "display_doc":
@@ -172,9 +140,14 @@ class AJXP_ClientDriver extends AJXP_Plugin
                     }
                 }
 
+                $root = $_SERVER['REQUEST_URI'];
+                if(basename($root) == "dashboard" || basename($root) == "settings" || basename($root) == "welcome" || strpos(basename($root), "ws-") === 0){
+                    $root = dirname($root);
+                }
                 $START_PARAMETERS = array(
                     "BOOTER_URL"=>"index.php?get_action=get_boot_conf",
-                    "MAIN_ELEMENT" => "ajxp_desktop"
+                    "MAIN_ELEMENT" => "ajxp_desktop",
+                    "APPLICATION_ROOT" => $root
                 );
                 if (AuthService::usersEnabled()) {
                     AuthService::preLogUser((isSet($httpVars["remote_session"])?$httpVars["remote_session"]:""));
@@ -201,7 +174,9 @@ class AJXP_ClientDriver extends AJXP_Plugin
                 }
                 // PRECOMPUTE BOOT CONF
                 if (!preg_match('/MSIE 7/',$_SERVER['HTTP_USER_AGENT']) && !preg_match('/MSIE 8/',$_SERVER['HTTP_USER_AGENT'])) {
-                    $START_PARAMETERS["PRELOADED_BOOT_CONF"] = $this->computeBootConf();
+                    $preloadedBootConf = $this->computeBootConf();
+                    AJXP_Controller::applyHook("loader.filter_boot_conf", array(&$preloadedBootConf));
+                    $START_PARAMETERS["PRELOADED_BOOT_CONF"] = $preloadedBootConf;
                 }
 
                 // PRECOMPUTE REGISTRY
@@ -220,6 +195,15 @@ class AJXP_ClientDriver extends AJXP_Plugin
 
                 $JSON_START_PARAMETERS = json_encode($START_PARAMETERS);
                 $crtTheme = $this->pluginConf["GUI_THEME"];
+                $additionalFrameworks = $this->getFilteredOption("JS_RESOURCES_BEFORE");
+                $ADDITIONAL_FRAMEWORKS = "";
+                if( !empty($additionalFrameworks) ){
+                    $frameworkList = explode(",", $additionalFrameworks);
+                    foreach($frameworkList as $index => $framework){
+                        $frameworkList[$index] = '<script language="javascript" type="text/javascript" src="'.$framework.'"></script>'."\n";
+                    }
+                    $ADDITIONAL_FRAMEWORKS = implode("", $frameworkList);
+                }
                 if (ConfService::getConf("JS_DEBUG")) {
                     if (!isSet($mess)) {
                         $mess = ConfService::getMessages();
@@ -238,6 +222,7 @@ class AJXP_ClientDriver extends AJXP_Plugin
                     if (preg_match('/MSIE 7/',$_SERVER['HTTP_USER_AGENT']) || preg_match('/MSIE 8/',$_SERVER['HTTP_USER_AGENT'])) {
                         $content = str_replace("ajaxplorer_boot.js", "ajaxplorer_boot_protolegacy.js", $content);
                     }
+                    $content = str_replace("AJXP_ADDITIONAL_JS_FRAMEWORKS", $ADDITIONAL_FRAMEWORKS, $content);
                     $content = AJXP_XMLWriter::replaceAjxpXmlKeywords($content, false);
                     $content = str_replace("AJXP_REBASE", isSet($START_PARAMETERS["REBASE"])?'<base href="'.$START_PARAMETERS["REBASE"].'"/>':"", $content);
                     if ($JSON_START_PARAMETERS) {
@@ -271,19 +256,22 @@ class AJXP_ClientDriver extends AJXP_Plugin
         if (isSet($_GET["server_prefix_uri"])) {
             $_SESSION["AJXP_SERVER_PREFIX_URI"] = str_replace("_UP_", "..", $_GET["server_prefix_uri"]);
         }
+        $currentIsMinisite = (strpos(session_name(), "AjaXplorer_Shared") === 0);
         $config = array();
         $config["ajxpResourcesFolder"] = "plugins/gui.ajax/res";
-        if (session_name() == "AjaXplorer_Shared") {
+        if ($currentIsMinisite) {
             $config["ajxpServerAccess"] = "index_shared.php";
         } else {
             $config["ajxpServerAccess"] = AJXP_SERVER_ACCESS;
         }
         $config["zipEnabled"] = ConfService::zipEnabled();
         $config["multipleFilesDownloadEnabled"] = ConfService::getCoreConf("ZIP_CREATION");
+        $customIcon = $this->getFilteredOption("CUSTOM_ICON");
+        self::filterXml($customIcon);
         $config["customWording"] = array(
             "welcomeMessage" => $this->getFilteredOption("CUSTOM_WELCOME_MESSAGE"),
             "title"			 => ConfService::getCoreConf("APPLICATION_TITLE"),
-            "icon"			 => $this->getFilteredOption("CUSTOM_ICON"),
+            "icon"			 => $customIcon,
             "iconWidth"		 => $this->getFilteredOption("CUSTOM_ICON_WIDTH"),
             "iconHeight"     => $this->getFilteredOption("CUSTOM_ICON_HEIGHT"),
             "iconOnly"       => $this->getFilteredOption("CUSTOM_ICON_ONLY"),
@@ -303,7 +291,7 @@ class AJXP_ClientDriver extends AJXP_Plugin
         } else {
             $to = $timeoutTime;
         }
-        if(session_name() == "AjaXplorer_Shared") $to = -1;
+        if($currentIsMinisite) $to = -1;
         $config["client_timeout"] = intval($to);
         $config["client_timeout_warning"] = floatval($this->getFilteredOption("CLIENT_TIMEOUT_WARN"));
         $config["availableLanguages"] = ConfService::getConf("AVAILABLE_LANG");
