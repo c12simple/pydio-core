@@ -67,10 +67,6 @@ class AuthService
      */
     public static function generateSecureToken()
     {
-        if(isSet($_SESSION["FORCE_SECURE_TOKEN"])){
-            $_SESSION["SECURE_TOKEN"] = $_SESSION["FORCE_SECURE_TOKEN"];
-            return $_SESSION["SECURE_TOKEN"];
-        }
         $_SESSION["SECURE_TOKEN"] = AJXP_Utils::generateRandomString(32); //md5(time());
         return $_SESSION["SECURE_TOKEN"];
     }
@@ -521,17 +517,17 @@ class AuthService
             if ($authDriver->getOption("TRANSMIT_CLEAR_PASS") !== true) {
                 $adminPass = md5(ADMIN_PASSWORD);
             }
-             self::createUser("admin", $adminPass, true);
-             if (ADMIN_PASSWORD == INITIAL_ADMIN_PASSWORD) {
-                 $userObject = ConfService::getConfStorageImpl()->createUserObject("admin");
-                 $userObject->setAdmin(true);
-                 self::updateAdminRights($userObject);
-                 if (self::changePasswordEnabled()) {
-                     $userObject->setLock("pass_change");
-                 }
-                 $userObject->save("superuser");
-                 $START_PARAMETERS["ALERT"] .= "Warning! User 'admin' was created with the initial password '". INITIAL_ADMIN_PASSWORD ."'. \\nPlease log in as admin and change the password now!";
-             }
+            self::createUser("admin", $adminPass, true);
+            if (ADMIN_PASSWORD == INITIAL_ADMIN_PASSWORD) {
+                $userObject = ConfService::getConfStorageImpl()->createUserObject("admin");
+                $userObject->setAdmin(true);
+                self::updateAdminRights($userObject);
+                if (self::changePasswordEnabled()) {
+                    $userObject->setLock("pass_change");
+                }
+                $userObject->save("superuser");
+                $START_PARAMETERS["ALERT"] .= "Warning! User 'admin' was created with the initial password '". INITIAL_ADMIN_PASSWORD ."'. \\nPlease log in as admin and change the password now!";
+            }
             self::updateUser($userObject);
         } else if ($adminCount == -1) {
             // Here we may come from a previous version! Check the "admin" user and set its right as admin.
@@ -594,9 +590,9 @@ class AuthService
 
     /**
      * Update a user with admin rights and return it
-    * @param AbstractAjxpUser $adminUser
+     * @param AbstractAjxpUser $adminUser
      * @return AbstractAjxpUser
-    */
+     */
     public static function updateAdminRights($adminUser)
     {
         if(!ConfService::getCoreConf("SKIP_ADMIN_RIGHTS_ALL_REPOS")){
@@ -972,7 +968,7 @@ class AuthService
         foreach (array_keys($users) as $userId) {
             if(($userId == "guest" && !ConfService::getCoreConf("ALLOW_GUEST_BROWSING", "auth")) || $userId == "ajxp.admin.users" || $userId == "") continue;
             if($regexp != null && !$authDriver->supportsUsersPagination() && !preg_match("/$regexp/i", $userId)) continue;
-            $allUsers[$userId] = $confDriver->createUserObject($userId);
+            $allUsers[$userId] = $confDriver->createUserObject($userId, false);
             if ($paginated) {
                 // Make sure to reload all children objects
                 foreach ($confDriver->getUserChildren($userId) as $childObject) {
@@ -1194,12 +1190,13 @@ class AuthService
      * @param boolean $excludeReserved,
      * @return AJXP_Role[]
      */
-    public static function getRolesList($roleIds = array(), $excludeReserved = false)
+    public static function getRolesList($roleIds = array(), $excludeReserved = false, $includeReserved = false)
     {
         //if(isSet(self::$roles)) return self::$roles;
         $confDriver = ConfService::getConfStorageImpl();
-        self::$roles = $confDriver->listRoles($roleIds, $excludeReserved);
+        self::$roles = $confDriver->listRoles($roleIds, $excludeReserved, $includeReserved);
         $repoList = null;
+        if($includeReserved) return self::$roles;
         foreach (self::$roles as $roleId => $roleObject) {
             if (is_a($roleObject, "AjxpRole")) {
                 if($repoList == null) $repoList = ConfService::getRepositoriesList("all");

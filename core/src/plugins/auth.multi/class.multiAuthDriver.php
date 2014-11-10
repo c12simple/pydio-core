@@ -135,21 +135,21 @@ class multiAuthDriver extends AbstractAuthDriver
 
         }
     }
-/*
-    public function getLoginRedirect(){
+    /*
+        public function getLoginRedirect(){
 
-        $l = $this->drivers[$this->masterName]->getLoginRedirect();
-        if(!empty($l)) return $l;
-        return $this->drivers[$this->slaveName]->getLoginRedirect();
-    }
+            $l = $this->drivers[$this->masterName]->getLoginRedirect();
+            if(!empty($l)) return $l;
+            return $this->drivers[$this->slaveName]->getLoginRedirect();
+        }
 
-    public function getLogoutRedirect(){
+        public function getLogoutRedirect(){
 
-        $l = $this->drivers[$this->masterName]->getLogoutRedirect();
-        if(!empty($l)) return $l;
-        return $this->drivers[$this->slaveName]->getLogoutRedirect();
-    }
-*/
+            $l = $this->drivers[$this->masterName]->getLogoutRedirect();
+            if(!empty($l)) return $l;
+            return $this->drivers[$this->slaveName]->getLogoutRedirect();
+        }
+    */
     protected function setCurrentDriverName($name)
     {
         $this->currentDriver = $name;
@@ -183,8 +183,10 @@ class multiAuthDriver extends AbstractAuthDriver
 
     public function getAuthScheme($login)
     {
+
         if (!isSet(multiAuthDriver::$schemesCache)) {
             foreach ($this->drivers as $scheme => $d) {
+                //if (strcmp($scheme, "ldap") === 0)  return $scheme;
                 if($d->userExists($login)) return $scheme;
             }
         } else if (isSet(multiAuthDriver::$schemesCache[$login])) {

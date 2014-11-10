@@ -506,7 +506,7 @@ class BootConfLoader extends AbstractConfDriver
      * @param boolean $excludeReserved,
      * @return array AjxpRole[]
      */
-    public function listRoles($roleIds = array(), $excludeReserved = false)
+    public function listRoles($roleIds = array(), $excludeReserved = false, $includeReserved = false)
     {
         // TODO: Implement listRoles() method.
     }

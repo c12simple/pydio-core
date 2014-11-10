@@ -61,9 +61,9 @@ abstract class AbstractConfDriver extends AJXP_Plugin
         parent::parseSpecificContributions($contribNode);
         if ($contribNode->nodeName == 'client_configs' && !ConfService::getCoreConf("WEBDAV_ENABLE")) {
             $actionXpath=new DOMXPath($contribNode->ownerDocument);
-            $webdavCompNodeList = $actionXpath->query('component_config/additional_tab[@id="webdav_pane"]', $contribNode);
+            $webdavCompNodeList = $actionXpath->query('component_config[@className="AjxpTabulator::userdashboard_main_tab"]', $contribNode);
             if ($webdavCompNodeList->length) {
-                $contribNode->removeChild($webdavCompNodeList->item(0)->parentNode);
+                $contribNode->removeChild($webdavCompNodeList->item(0));
             }
         }
 
@@ -206,9 +206,9 @@ abstract class AbstractConfDriver extends AJXP_Plugin
 
     /**
      * Intercept CONF and AUTH configs to use the BootConf Storage
-        * @param String $pluginId
-        * @param String $options
-        */
+     * @param String $pluginId
+     * @param String $options
+     */
     public function savePluginConfig($pluginId, $options)
     {
         if ($this->pluginUsesBootConf($pluginId)) {
@@ -293,7 +293,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
      * @param boolean $excludeReserved,
      * @return array AjxpRole[]
      */
-    abstract public function listRoles($roleIds = array(), $excludeReserved = false);
+    abstract public function listRoles($roleIds = array(), $excludeReserved = false, $includeReserved = false);
     abstract public function saveRoles($roles);
 
     /**
@@ -381,15 +381,18 @@ abstract class AbstractConfDriver extends AJXP_Plugin
      * @param String $userId
      * @return AbstractAjxpUser
      */
-    public function createUserObject($userId)
+    public function createUserObject($userId, $update = true)
     {
         $userId = AuthService::filterUserSensitivity($userId);
         $abstractUser = $this->instantiateAbstractUserImpl($userId);
         if (!$abstractUser->storageExists()) {
             AuthService::updateDefaultRights($abstractUser);
         }
-        AuthService::updateAutoApplyRole($abstractUser);
-        AuthService::updateAuthProvidedData($abstractUser);
+        //if($update)
+        {
+            AuthService::updateAutoApplyRole($abstractUser);
+            AuthService::updateAuthProvidedData($abstractUser);
+        }
         return $abstractUser;
     }
 
@@ -467,7 +470,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
     abstract public function relabelGroup($groupPath, $groupLabel);
 
 
-        /**
+    /**
      * @param string $baseGroup
      * @return string[]
      */
@@ -492,7 +495,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
         }
         if ( ConfService::getCoreConf("SKIP_USER_HISTORY", "conf") === true ) {
             $stringPrefs = array("display","lang","pending_folder", "thumb_size","plugins_preferences","upload_auto_send","upload_auto_close", "upload_existing","action_bar_style");
-            $jsonPrefs = array("columns_size", "columns_visibility", "gui_preferences");
+            $jsonPrefs = array();
             $prefs["SKIP_USER_HISTORY"] = array("value" => "true", "type" => "string" );
         }
         foreach ($stringPrefs as $pref) {
@@ -566,7 +569,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 //$logMessage = "Successfully Switched!";
                 $this->logInfo("Switch Repository", array("rep. id"=>$repository_id));
 
-            break;
+                break;
 
             //------------------------------------
             //	SEND XML REGISTRY
@@ -613,7 +616,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                     }
                 }
 
-            break;
+                break;
 
             //------------------------------------
             //	BOOKMARK BAR
@@ -672,7 +675,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 AJXP_XMLWriter::writeBookmarks($bmUser->getBookmarks(), true, isset($httpVars["format"])?$httpVars["format"]:"legacy");
                 AJXP_XMLWriter::close();
 
-            break;
+                break;
 
             //------------------------------------
             //	SAVE USER PREFERENCE
@@ -698,7 +701,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 header("Content-Type:text/plain");
                 print "SUCCESS";
 
-            break;
+                break;
 
             //------------------------------------
             //	SAVE USER PREFERENCE
@@ -808,7 +811,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                     AJXP_XMLWriter::close();
                 }
 
-            break;
+                break;
 
             case "user_update_user":
 
@@ -832,7 +835,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 HTMLWriter::charsetHeader("application/json");
                 echo json_encode($result);
 
-            break;
+                break;
 
             //------------------------------------
             // WEBDAV PREFERENCES
@@ -882,7 +885,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 foreach ($repoList as $repoIndex => $repoObject) {
                     $accessType = $repoObject->getAccessType();
                     $driver = AJXP_PluginsService::getInstance()->getPluginByTypeName("access", $accessType);
-            if (is_a($driver, "AjxpWrapperProvider") && !$repoObject->getOption("AJXP_WEBDAV_DISABLED") && ($loggedUser->canRead($repoIndex) || $loggedUser->canWrite($repoIndex))) {
+                    if (is_a($driver, "AjxpWrapperProvider") && !$repoObject->getOption("AJXP_WEBDAV_DISABLED") && ($loggedUser->canRead($repoIndex) || $loggedUser->canWrite($repoIndex))) {
                         $davRepos[$repoIndex] = $webdavBaseUrl ."".($repoObject->getSlug()==null?$repoObject->getId():$repoObject->getSlug());
                     }
                 }
@@ -897,7 +900,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 HTMLWriter::charsetHeader("application/json");
                 print(json_encode($prefs));
 
-            break;
+                break;
 
             case  "get_user_template_logo":
 
@@ -924,7 +927,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                     readfile(AJXP_INSTALL_PATH."/".AJXP_PLUGINS_FOLDER."/core.conf/".$logo);
                 }
 
-            break;
+                break;
 
             case  "get_user_templates_definition":
 
@@ -963,7 +966,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 AJXP_XMLWriter::close("repository_templates");
 
 
-            break;
+                break;
 
             case "user_create_repository" :
 
@@ -995,7 +998,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 }
                 AJXP_XMLWriter::close();
 
-            break;
+                break;
 
             case "user_delete_repository" :
 
@@ -1021,7 +1024,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 }
                 AJXP_XMLWriter::close();
 
-            break;
+                break;
 
             case "user_delete_user":
 
@@ -1033,7 +1036,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 AuthService::deleteUser($userId);
                 echo "SUCCESS";
 
-            break;
+                break;
 
             case "user_list_authorized_users" :
 
@@ -1047,8 +1050,13 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 $crtValue = $httpVars["value"];
                 $usersOnly = isSet($httpVars["users_only"]) && $httpVars["users_only"] == "true";
                 $existingOnly = isSet($httpVars["existing_only"]) && $httpVars["existing_only"] == "true";
-                if(!empty($crtValue)) $regexp = '^'.$crtValue;
+
+                if(!empty($crtValue)) {
+                    //$crtValue = str_replace(' ','\\s', $crtValue);
+                    $regexp = '^'.$crtValue;
+                }
                 else $regexp = null;
+
                 $limit = intval(ConfService::getCoreConf("USERS_LIST_COMPLETE_LIMIT", "conf"));
                 $searchAll = ConfService::getCoreConf("CROSSUSERS_ALLGROUPS", "conf");
                 $displayAll = ConfService::getCoreConf("CROSSUSERS_ALLGROUPS_DISPLAY", "conf");
@@ -1059,7 +1067,27 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 AuthService::setGroupFiltering(false);
                 $allUsers = AuthService::listUsers($baseGroup, $regexp, 0, $limit, false);
                 if (!$usersOnly) {
-                    $allGroups = AuthService::listChildrenGroups($baseGroup);
+                    //$allGroups = AuthService::listChildrenGroups($baseGroup);
+
+                    // Should filter to get appropriate group
+                    // Etudian => list of groups
+                    // Employee => list of groups  ??
+
+                    //$allUserRoles = AuthService::getRolesList($loggedUser->getRoles(), true, true);
+
+                    $allUserRoles = $loggedUser->getRoles();
+                    /*$allRoles = array();
+                    foreach($allUserRoles as $roleId => $role){
+                        $allRoles[$roleId] = AuthService::getRole($roleId, false);
+                    }*/
+                    //$allRoles = $loggedUser->getRoles();
+                    $allGroups = array();
+                    if($allUserRoles){
+                        foreach($allUserRoles as $roleid => $role){
+                            if(strpos($roleid, 'ldapgroup_') === false) continue;
+                            $allGroups[$roleid] = substr($roleid, 10);
+                        }
+                    }
                 }
                 $users = "";
                 $index = 0;
@@ -1139,7 +1167,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                     }
                     $this->loadBinary($context, $httpVars["binary_id"]);
                 }
-            break;
+                break;
 
             case "get_global_binary_param" :
 
@@ -1152,7 +1180,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                 } else if (isSet($httpVars["binary_id"])) {
                     $this->loadBinary(array(), $httpVars["binary_id"]);
                 }
-            break;
+                break;
 
             case "store_binary_temp" :
 
@@ -1178,7 +1206,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
 
 
             default;
-            break;
+                break;
         }
         if (isset($logMessage) || isset($errorMessage)) {
             $xmlBuffer .= AJXP_XMLWriter::sendMessage((isSet($logMessage)?$logMessage:null), (isSet($errorMessage)?$errorMessage:null), false);

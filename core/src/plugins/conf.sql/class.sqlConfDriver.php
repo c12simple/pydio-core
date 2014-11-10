@@ -608,7 +608,8 @@ class sqlConfDriver extends AbstractConfDriver
     }
 
 
-    public function listRoles($roleIds = array(), $excludeReserved = false)
+
+    public function listRoles($roleIds = array(), $excludeReserved = false, $includeReserved = false)
     {
         $wClauses = array();
         if (count($roleIds)) {
@@ -618,10 +619,14 @@ class sqlConfDriver extends AbstractConfDriver
         if ($excludeReserved) {
             $wClauses[] = array('[role_id] NOT LIKE %like~', 'AJXP_');
         }
+        if($includeReserved){
+            $wClauses[] = array('[role_id] LIKE %like~', 'ldapgroup_');
+        }
         if($this->sqlDriver["driver"] == "postgre"){
             dibi::nativeQuery("SET bytea_output=escape");
         }
-        $res = dibi::query('SELECT * FROM [ajxp_roles] %if', count($wClauses), 'WHERE %and', $wClauses);
+
+        $res = dibi::query('SELECT * FROM [ajxp_roles] %if', count($wClauses), 'WHERE %and ', $wClauses);
         $all = $res->fetchAll();
 
         $roles = Array();

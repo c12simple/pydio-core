@@ -142,7 +142,7 @@ class serialConfDriver extends AbstractConfDriver
     }
 
 
-    public function listRoles($roleIds = array(), $excludeReserved = false)
+    public function listRoles($roleIds = array(), $excludeReserved = false, $includeReserved = false)
     {
         $all = AJXP_Utils::loadSerialFile($this->rolesSerialFile);
         $result = array();
