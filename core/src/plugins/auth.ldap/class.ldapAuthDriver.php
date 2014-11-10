@@ -308,9 +308,6 @@ class ldapAuthDriver extends AbstractAuthDriver
             $conn = array($this->ldapconn);
         }
 
-
-
-
         $expected = array($this->ldapUserAttr);
         if ($login != null && (!empty($this->customParamsMapping) || !empty($this->paramsMapping))) {
             if (!empty($this->customParamsMapping)) {
