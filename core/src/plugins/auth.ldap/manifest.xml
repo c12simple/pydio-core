@@ -18,6 +18,7 @@
         <param name="LDAP_FILTER" type="string" label="CONF_MESSAGE[LDAP Filter]" description="CONF_MESSAGE[Filter which users to fetch.]" mandatory="false" default="objectClass=person"/>
         <param name="LDAP_USERATTR" type="string" label="CONF_MESSAGE[User attribute]" description="CONF_MESSAGE[Username attribute]" mandatory="false"/>
         <param name="LDAP_FAKE_MEMBEROF" type="boolean" label="Use Member Of" description="In openldap, there is no memberOf attribute. Enable this option to create additionally memberOf attribute" default="false" mandatory="false"/>
+        <param name="LDAP_PAGE_SIZE" type="string" label="CONF_MESSAGE[LDAP Server page size]" description="CONF_MESSAGE[Page size of LDAP Server]" mandatory="false" default="500"/>
         <param name="LDAP_GROUP_PREFIX" type="string" label="CONF_MESSAGE[Role Prefix]" description="CONF_MESSAGE[Role prefix when you mapping memberof => roleID]" default="ldapgroup_" mandatory="false" />
         <param name="LDAP_SEARCHUSER_ATTR" type="string" label="CONF_MESSAGE[Search Users by Attribute]" description="CONF_MESSAGE[When looking for a user through autocomplete, search on a specific parameter instead of user ID]" mandatory="false" default=""/>
         <param name="LDAP_GDN" type="string" replicationGroup="LDAPGDN" label="CONF_MESSAGE[Groups DN]" description="CONF_MESSAGE[DN where the groups are stored. Must be used in cunjonction with a group parameter mapping, generally using the memberOf feature.]" mandatory="false"/>

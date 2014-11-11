@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3b2736a-be55-442e-8393-dba9a8160a92" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/plugins/core.conf/class.AbstractConfDriver.php" afterPath="$PROJECT_DIR$/core/src/plugins/core.conf/class.AbstractConfDriver.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/core/classes/class.AuthService.php" afterPath="$PROJECT_DIR$/core/src/core/classes/class.AuthService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php" afterPath="$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml" afterPath="$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml" />
     </list>
     <ignored path="pydio-core.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,11 +29,29 @@
       <file leaf-file-name="class.ldapAuthDriver.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="362" column="45" selection-start="14330" selection-end="14330" vertical-scroll-proportion="0.8450704" vertical-offset="4620" max-vertical-offset="12405">
+            <state line="338" column="28" selection-start="13333" selection-end="13333" vertical-scroll-proportion="0.3606789" vertical-offset="4185" max-vertical-offset="12480">
               <folding>
-                <element signature="e#9265#11011#0" expanded="false" />
-                <element signature="e#15813#17458#0" expanded="false" />
+                <element signature="e#9373#11119#0" expanded="false" />
+                <element signature="e#16020#17665#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.multi/manifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2205">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="233" selection-start="2252" selection-end="2252" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -72,104 +88,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="659" column="42" selection-start="25786" selection-end="25786" vertical-scroll-proportion="-3.1346154" vertical-offset="9722" max-vertical-offset="18990">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="class.AJXP_SqlUser.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/plugins/conf.sql/class.AJXP_SqlUser.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="8115">
-              <folding>
-                <marker date="1415632402716" expanded="true" signature="5271:5335" placeholder="DELETE FROM ..." />
-                <marker date="1415632402716" expanded="true" signature="6206:6280" placeholder="INSERT INTO ..." />
-                <marker date="1415632402716" expanded="true" signature="8314:8347" placeholder="INSERT INTO ..." />
-                <marker date="1415632402716" expanded="true" signature="9569:9659" placeholder="DELETE FROM ..." />
-                <marker date="1415632402716" expanded="true" signature="11872:11927" placeholder="SELECT [grou..." />
-                <marker date="1415632402716" expanded="true" signature="12166:12237" placeholder="SELECT [repo..." />
-                <marker date="1415632402716" expanded="true" signature="12848:12910" placeholder="SELECT [name..." />
-                <marker date="1415632402716" expanded="true" signature="13037:13118" placeholder="SELECT [repo..." />
-                <marker date="1415632402716" expanded="true" signature="16176:16249" placeholder="DELETE FROM ..." />
-                <marker date="1415632402716" expanded="true" signature="17339:17386" placeholder="DELETE FROM ..." />
-                <marker date="1415632402716" expanded="true" signature="17840:17870" placeholder="INSERT INTO ..." />
-                <marker date="1415632402716" expanded="true" signature="19987:20146" placeholder="SELECT [u.lo..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="class.sqlConfDriver.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/plugins/conf.sql/class.sqlConfDriver.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="622" column="71" selection-start="25319" selection-end="25319" vertical-scroll-proportion="-8.458333" vertical-offset="8857" max-vertical-offset="16530">
-              <folding>
-                <marker date="1415634368530" expanded="true" signature="2726:2777" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="3201:3259" placeholder="SELECT COUNT..." />
-                <marker date="1415634368530" expanded="true" signature="3482:3549" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="8163:8214" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="8917:8965" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="9352:9421" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="11785:11831" placeholder="SELECT COUNT..." />
-                <marker date="1415634368530" expanded="true" signature="11977:12039" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="12134:12186" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="12576:12619" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="12921:12972" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="13411:13454" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="13758:13809" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="15796:15819" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="16047:16120" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="16234:16275" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="16341:16390" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="16456:16479" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="16706:16779" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="17230:17271" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="17330:17379" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="17445:17498" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="17787:17877" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="18017:18095" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="19808:19979" placeholder="SELECT [ajxp..." />
-                <marker date="1415634368530" expanded="true" signature="20390:20488" placeholder="SELECT [role..." />
-                <marker date="1415634368530" expanded="true" signature="20616:20702" placeholder="SELECT [role..." />
-                <marker date="1415634368530" expanded="true" signature="22298:22419" placeholder="SELECT count..." />
-                <marker date="1415634368530" expanded="true" signature="22493:22607" placeholder="SELECT count..." />
-                <marker date="1415634368530" expanded="true" signature="25480:25510" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="26081:26105" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="26340:26438" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="26601:26667" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="27033:27076" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="27254:27351" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="27497:27563" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="28014:28057" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="28150:28228" placeholder="SELECT COUNT..ajxp_user_rights..." />
-                <marker date="1415634368530" expanded="true" signature="28753:28810" placeholder="SELECT COUNT..." />
-                <marker date="1415634368530" expanded="true" signature="29019:29044" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="29448:29545" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="29756:29799" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="29849:29924" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="29977:30022" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="30325:30410" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="31189:31268" placeholder="SELECT [logi..." />
-                <marker date="1415634368530" expanded="true" signature="31647:31696" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="31734:31782" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="31820:31872" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="31910:31955" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="32954:33024" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="33068:33204" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="33411:33481" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="33752:33824" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="34960:35014" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="35111:35155" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="38639:38740" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="39239:39326" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="39358:39430" placeholder="SELECT * FRO..." />
-                <marker date="1415634368530" expanded="true" signature="40450:40534" placeholder="SELECT [team..." />
-                <marker date="1415634368530" expanded="true" signature="40679:40775" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="41019:41103" placeholder="SELECT [team..." />
-                <marker date="1415634368530" expanded="true" signature="41276:41326" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="41465:41561" placeholder="INSERT INTO ..." />
-                <marker date="1415634368530" expanded="true" signature="41807:41878" placeholder="DELETE FROM ..." />
-                <marker date="1415634368530" expanded="true" signature="42001:42091" placeholder="DELETE FROM ..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -219,7 +137,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml" />
         <option value="$PROJECT_DIR$/core/src/plugins/auth.multi/class.multiAuthDriver.php" />
         <option value="$PROJECT_DIR$/core/src/plugins/conf.sql/class.sqlConfDriver.php" />
         <option value="$PROJECT_DIR$/core/src/plugins/conf.serial/class.serialConfDriver.php" />
@@ -227,6 +144,7 @@
         <option value="$PROJECT_DIR$/core/src/conf/bootstrap_conf.php" />
         <option value="$PROJECT_DIR$/core/src/plugins/core.conf/class.AbstractConfDriver.php" />
         <option value="$PROJECT_DIR$/core/src/core/classes/class.AuthService.php" />
+        <option value="$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml" />
         <option value="$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php" />
       </list>
     </option>
@@ -239,10 +157,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="local" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="286" />
-    <option name="y" value="75" />
-    <option name="width" value="1307" />
-    <option name="height" value="742" />
+    <option name="x" value="1415" />
+    <option name="y" value="-4" />
+    <option name="width" value="1871" />
+    <option name="height" value="1084" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -420,54 +338,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pydio-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pydio-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pydio-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pydio-core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="classes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -530,22 +400,22 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="286" y="75" width="1307" height="742" extended-state="0" />
+    <frame x="1415" y="-4" width="1871" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36967808" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1879543" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47826087" sideWeight="0.8857368" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3084112" sideWeight="0.8857368" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4623656" sideWeight="0.1142632" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25756457" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3193676" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22088572" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -572,13 +442,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php</url>
-          <line>432</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -586,29 +449,22 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="13" selection-start="4827" selection-end="4827" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/plugins/conf.sql/class.AJXP_SqlUser.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8115">
           <folding>
-            <marker date="1415632402716" expanded="true" signature="5271:5335" placeholder="DELETE FROM ..." />
-            <marker date="1415632402716" expanded="true" signature="6206:6280" placeholder="INSERT INTO ..." />
-            <marker date="1415632402716" expanded="true" signature="8314:8347" placeholder="INSERT INTO ..." />
-            <marker date="1415632402716" expanded="true" signature="9569:9659" placeholder="DELETE FROM ..." />
-            <marker date="1415632402716" expanded="true" signature="11872:11927" placeholder="SELECT [grou..." />
-            <marker date="1415632402716" expanded="true" signature="12166:12237" placeholder="SELECT [repo..." />
-            <marker date="1415632402716" expanded="true" signature="12848:12910" placeholder="SELECT [name..." />
-            <marker date="1415632402716" expanded="true" signature="13037:13118" placeholder="SELECT [repo..." />
-            <marker date="1415632402716" expanded="true" signature="16176:16249" placeholder="DELETE FROM ..." />
-            <marker date="1415632402716" expanded="true" signature="17339:17386" placeholder="DELETE FROM ..." />
-            <marker date="1415632402716" expanded="true" signature="17840:17870" placeholder="INSERT INTO ..." />
-            <marker date="1415632402716" expanded="true" signature="19987:20146" placeholder="SELECT [u.lo..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [grou..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [repo..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [name..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [repo..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [u.lo..." />
           </folding>
         </state>
       </provider>
@@ -617,72 +473,72 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="622" column="71" selection-start="25319" selection-end="25319" vertical-scroll-proportion="-8.458333" vertical-offset="8857" max-vertical-offset="16530">
           <folding>
-            <marker date="1415634368530" expanded="true" signature="2726:2777" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="3201:3259" placeholder="SELECT COUNT..." />
-            <marker date="1415634368530" expanded="true" signature="3482:3549" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="8163:8214" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="8917:8965" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="9352:9421" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="11785:11831" placeholder="SELECT COUNT..." />
-            <marker date="1415634368530" expanded="true" signature="11977:12039" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="12134:12186" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="12576:12619" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="12921:12972" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="13411:13454" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="13758:13809" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="15796:15819" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="16047:16120" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="16234:16275" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="16341:16390" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="16456:16479" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="16706:16779" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="17230:17271" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="17330:17379" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="17445:17498" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="17787:17877" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="18017:18095" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="19808:19979" placeholder="SELECT [ajxp..." />
-            <marker date="1415634368530" expanded="true" signature="20390:20488" placeholder="SELECT [role..." />
-            <marker date="1415634368530" expanded="true" signature="20616:20702" placeholder="SELECT [role..." />
-            <marker date="1415634368530" expanded="true" signature="22298:22419" placeholder="SELECT count..." />
-            <marker date="1415634368530" expanded="true" signature="22493:22607" placeholder="SELECT count..." />
-            <marker date="1415634368530" expanded="true" signature="25480:25510" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="26081:26105" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="26340:26438" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="26601:26667" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="27033:27076" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="27254:27351" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="27497:27563" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="28014:28057" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="28150:28228" placeholder="SELECT COUNT..ajxp_user_rights..." />
-            <marker date="1415634368530" expanded="true" signature="28753:28810" placeholder="SELECT COUNT..." />
-            <marker date="1415634368530" expanded="true" signature="29019:29044" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="29448:29545" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="29756:29799" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="29849:29924" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="29977:30022" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="30325:30410" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="31189:31268" placeholder="SELECT [logi..." />
-            <marker date="1415634368530" expanded="true" signature="31647:31696" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="31734:31782" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="31820:31872" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="31910:31955" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="32954:33024" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="33068:33204" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="33411:33481" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="33752:33824" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="34960:35014" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="35111:35155" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="38639:38740" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="39239:39326" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="39358:39430" placeholder="SELECT * FRO..." />
-            <marker date="1415634368530" expanded="true" signature="40450:40534" placeholder="SELECT [team..." />
-            <marker date="1415634368530" expanded="true" signature="40679:40775" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="41019:41103" placeholder="SELECT [team..." />
-            <marker date="1415634368530" expanded="true" signature="41276:41326" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="41465:41561" placeholder="INSERT INTO ..." />
-            <marker date="1415634368530" expanded="true" signature="41807:41878" placeholder="DELETE FROM ..." />
-            <marker date="1415634368530" expanded="true" signature="42001:42091" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT [ajxp..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT [role..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT [role..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT count..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT count..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..ajxp_user_rights..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT [logi..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT [team..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT [team..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
           </folding>
         </state>
       </provider>
@@ -736,12 +592,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.multi/manifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2205">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="233" selection-start="2252" selection-end="2252" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="362" column="45" selection-start="14330" selection-end="14330" vertical-scroll-proportion="0.8450704" vertical-offset="4620" max-vertical-offset="12405">
+        <state line="338" column="28" selection-start="13333" selection-end="13333" vertical-scroll-proportion="0.3606789" vertical-offset="4185" max-vertical-offset="12480">
           <folding>
-            <element signature="e#9265#11011#0" expanded="false" />
-            <element signature="e#15813#17458#0" expanded="false" />
+            <element signature="e#9373#11119#0" expanded="false" />
+            <element signature="e#16020#17665#0" expanded="false" />
           </folding>
         </state>
       </provider>

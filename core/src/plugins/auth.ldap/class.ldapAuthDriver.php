@@ -41,6 +41,7 @@ class ldapAuthDriver extends AbstractAuthDriver
     public $ldapGroupAttr;
     public $enableMemberOf;
     public $mappedRolePrefix;
+    public $pageSize;
 
     public $ldapconn = null;
     public $separateGroup = "";
@@ -72,6 +73,7 @@ class ldapAuthDriver extends AbstractAuthDriver
         if ($options["LDAP_USER"]) $this->ldapAdminUsername = $options["LDAP_USER"];
         if ($options["LDAP_PASSWORD"]) $this->ldapAdminPassword = $options["LDAP_PASSWORD"];
         if ($options["LDAP_FAKE_MEMBEROF"]) $this->enableMemberOf = $options["LDAP_FAKE_MEMBEROF"];
+        if ($options["LDAP_PAGE_SIZE"]) $this->pageSize = $options["LDAP_PAGE_SIZE"];
         if ($options["LDAP_GROUP_PREFIX"]) $this->mappedRolePrefix = $options["LDAP_GROUP_PREFIX"];
         if ($options["LDAP_DN"]) $this->ldapDN = $this->parseReplicatedParams($options, array("LDAP_DN"));
         if ($options["LDAP_GDN"]) $this->ldapGDN = $this->parseReplicatedParams($options, array("LDAP_GDN"));
@@ -333,7 +335,10 @@ class ldapAuthDriver extends AbstractAuthDriver
         //$ret = ldap_search($conn,$this->ldapDN,$filter, $expected);
 
         $cookie = '';
-        $pageSize = 500;
+        if(empty($this->pageSize) && is_numeric($this->pageSize)){
+            $pageSize = 500;
+        }
+
 
         $allEntries = array("count" => 0);
         $isSupportPagedResult = function_exists("ldap_control_paged_result") && function_exists("ldap_control_paged_result_response");
@@ -379,7 +384,7 @@ class ldapAuthDriver extends AbstractAuthDriver
                         if (($offset != -1) && ($limit!= -1) && $index >= $offset + $limit) break;
                     }
 
-                    //if(($index >= $offset + $limit) && ($limit != -1)) $gotAllEntries = true;
+                    if(($index >= $offset + $limit) && ($limit != -1) && ($offset != -1)) $gotAllEntries = true;
                 }
             }
             if ($isSupportPagedResult)
