@@ -233,55 +233,6 @@ class ldapAuthDriver extends AbstractAuthDriver
 
     public function getUserEntries($login = null, $countOnly = false, $offset = -1, $limit = -1, $regexpOnSearchAttr = false)
     {
-//        if(!$countOnly && ($offset == -1) && ($limit == -1)){
-//            file_get_contents("/home/c12simple/Bureau/pyuni/plugins/auth.ldap/cache.txt", $s);
-//            $allEntries = unserialize($s);
-//            //return $allEntries;
-//        }
-/*
-        if ($login == null) {
-            $filter = $this->ldapFilter;
-        } else {
-            $searchAttr = $this->ldapUserAttr;
-            if($regexpOnSearchAttr && !empty($this->options["LDAP_SEARCHUSER_ATTR"])){
-                $searchAttrs = $this->options["LDAP_SEARCHUSER_ATTR"];
-                $searchAttrsArray = explode(",", $searchAttrs);
-                $myfilter = "";
-                if(is_array($searchAttrsArray)){
-                    foreach($searchAttrsArray as $attr){
-                        $myfilter .= "(".$attr."=".$login.")";
-                    }
-                }else{
-                    $myfilter = "(". $searchAttrs. "=" . $login.")";
-                }
-            }
-
-            $myfilter = "(|".$myfilter."(".$this->ldapUserAttr ."=".$login."))";
-
-            if($this->ldapFilter == "") $filter = $myfilter;
-            else  $filter = "(&" . $this->ldapFilter . "(|(" . $searchAttr . "=" . $login . "))(". $this->ldapUserAttr. "=" . $login . "))";
-            if($this->ldapFilter == "") $filter = $myfilter;
-            else  $filter = "(&" . $this->ldapFilter . $myfilter.")";
-        }
-
-        if (empty($filter)) {
-            if(!empty($this->dynamicFilter)) $filter = $this->dynamicFilter;
-            else $filter = $this->ldapUserAttr . "=*";
-        } else {
-            if(!empty($this->dynamicFilter)) $filter = "(&(".$this->dynamicFilter.")".$filter.")";
-        }
-        if ($this->ldapconn == null) {
-            $this->startConnexion();
-        }
-        $conn = array();
-        if (is_array($this->ldapDN)) {
-            foreach ($this->ldapDN as $dn) {
-                $conn[] = $this->ldapconn;
-            }
-        } else {
-            $conn = array($this->ldapconn);
-        }*/
-
         if ($login == null) {
             $filter = $this->ldapFilter;
         } else {
@@ -336,7 +287,7 @@ class ldapAuthDriver extends AbstractAuthDriver
 
         $cookie = '';
         if(empty($this->pageSize) && is_numeric($this->pageSize)){
-            $pageSize = 500;
+            $this->pageSize = 500;
         }
 
 
@@ -347,7 +298,7 @@ class ldapAuthDriver extends AbstractAuthDriver
         $index = 0;
         do {
             if ($isSupportPagedResult)
-                ldap_control_paged_result($this->ldapconn, $pageSize, true, $cookie);
+                ldap_control_paged_result($this->ldapconn, $this->pageSize, true, $cookie);
 
             $ret = ldap_search($conn, $this->ldapDN, $filter, $expected, 0, 0);
             foreach ($ret as $i => $resourceResult) {
@@ -362,6 +313,9 @@ class ldapAuthDriver extends AbstractAuthDriver
                 }
 
                 $entries = ldap_get_entries($conn[$i], $resourceResult);
+
+                // for better performance
+                if ((!is_array($entries)) && ($offset != -1) && ($limit != -1) && (($index + $entries["count"]) < $offset)) continue;
 
                 if (!empty($entries["count"])) {
                     $allEntries["count"] += $entries["count"];
