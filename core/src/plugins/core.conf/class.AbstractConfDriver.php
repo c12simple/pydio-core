@@ -388,7 +388,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
         if (!$abstractUser->storageExists()) {
             AuthService::updateDefaultRights($abstractUser);
         }
-        //if($update)
+        if($update)
         {
             AuthService::updateAutoApplyRole($abstractUser);
             AuthService::updateAuthProvidedData($abstractUser);

@@ -968,7 +968,10 @@ class AuthService
         foreach (array_keys($users) as $userId) {
             if(($userId == "guest" && !ConfService::getCoreConf("ALLOW_GUEST_BROWSING", "auth")) || $userId == "ajxp.admin.users" || $userId == "") continue;
             if($regexp != null && !$authDriver->supportsUsersPagination() && !preg_match("/$regexp/i", $userId)) continue;
-            $allUsers[$userId] = $confDriver->createUserObject($userId, false);
+
+            //$allUsers[$userId] = $confDriver->createUserObject($userId, false);
+            $allUsers[$userId] = $confDriver->createUserObject($userId);
+
             if ($paginated) {
                 // Make sure to reload all children objects
                 foreach ($confDriver->getUserChildren($userId) as $childObject) {

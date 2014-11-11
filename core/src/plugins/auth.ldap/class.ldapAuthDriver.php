@@ -356,8 +356,6 @@ class ldapAuthDriver extends AbstractAuthDriver
                     ldap_sort($conn[$i], $resourceResult, $this->ldapUserAttr);
                 }
 
-
-
                 $entries = ldap_get_entries($conn[$i], $resourceResult);
 
                 if (!empty($entries["count"])) {
@@ -378,10 +376,10 @@ class ldapAuthDriver extends AbstractAuthDriver
 
                         $allEntries[] = $entry;
                         $index++;
-                        if ($limit != -1 && $index >= $offset + $limit) break;
+                        if (($offset != -1) && ($limit!= -1) && $index >= $offset + $limit) break;
                     }
 
-                    if($index >= $offset + $limit) $gotAllEntries = true;
+                    //if(($index >= $offset + $limit) && ($limit != -1)) $gotAllEntries = true;
                 }
             }
             if ($isSupportPagedResult)
@@ -768,9 +766,10 @@ class ldapAuthDriver extends AbstractAuthDriver
                                 if ($key == "memberof") {
                                     $ldap_prefix = $this->mappedRolePrefix;
 
+                                    /*
+
                                     $userroles = $userObject->getRoles();
                                     //remove all mapped roles before
-
 
                                     if (is_array($userroles)) {
                                         foreach ($userroles as $key => $role) {
@@ -780,8 +779,7 @@ class ldapAuthDriver extends AbstractAuthDriver
                                         }
                                     }
                                     $userObject->recomputeMergedRole();
-
-
+                                    */
 
                                     foreach ($memberValues as $uniqValue => $fullDN) {
                                         $uniqValue = $ldap_prefix . $uniqValue;
