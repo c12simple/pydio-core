@@ -43,6 +43,9 @@ class ldapAuthDriver extends AbstractAuthDriver
     public $mappedRolePrefix;
     public $pageSize;
 
+    public $ldap_cache_file;
+    public $ldap_cache_count_file;
+
     public $ldapconn = null;
     public $separateGroup = "";
 
@@ -77,6 +80,10 @@ class ldapAuthDriver extends AbstractAuthDriver
         if ($options["LDAP_GROUP_PREFIX"]) $this->mappedRolePrefix = $options["LDAP_GROUP_PREFIX"];
         if ($options["LDAP_DN"]) $this->ldapDN = $this->parseReplicatedParams($options, array("LDAP_DN"));
         if ($options["LDAP_GDN"]) $this->ldapGDN = $this->parseReplicatedParams($options, array("LDAP_GDN"));
+
+        $this->ldap_cache_file = AJXP_CACHE_DIR."/ldap/ldap.ser";
+        $this->ldap_cache_count_file = AJXP_CACHE_DIR."/ldap/ldap_count.ser";
+
         if (is_array($options["CUSTOM_DATA_MAPPING"])) $this->customParamsMapping = $options["CUSTOM_DATA_MAPPING"];
         $this->paramsMapping = $this->parseReplicatedParams($options, array("MAPPING_LDAP_PARAM", "MAPPING_LOCAL_TYPE", "MAPPING_LOCAL_PARAM"));
         if (count($this->paramsMapping)) {
@@ -230,7 +237,6 @@ class ldapAuthDriver extends AbstractAuthDriver
 
     }
 
-
     public function getUserEntries($login = null, $countOnly = false, $offset = -1, $limit = -1, $regexpOnSearchAttr = false)
     {
         if ($login == null) {
@@ -315,7 +321,10 @@ class ldapAuthDriver extends AbstractAuthDriver
                 $entries = ldap_get_entries($conn[$i], $resourceResult);
 
                 // for better performance
-                if ((!is_array($entries)) && ($offset != -1) && ($limit != -1) && (($index + $entries["count"]) < $offset)) continue;
+                if ((is_array($entries)) && ($offset != -1) && ($limit != -1) && (($index + $this->pageSize) < $offset)){
+                    $index += $this->pageSize;
+                    continue;
+                }
 
                 if (!empty($entries["count"])) {
                     $allEntries["count"] += $entries["count"];
@@ -335,10 +344,12 @@ class ldapAuthDriver extends AbstractAuthDriver
 
                         $allEntries[] = $entry;
                         $index++;
-                        if (($offset != -1) && ($limit!= -1) && $index >= $offset + $limit) break;
+                        if (($offset != -1) && ($limit!= -1) && $index > $offset + $limit)
+                            break;
                     }
 
-                    if(($index >= $offset + $limit) && ($limit != -1) && ($offset != -1)) $gotAllEntries = true;
+                    if(($index > $offset + $limit) && ($limit != -1) && ($offset != -1))
+                        $gotAllEntries = true;
                 }
             }
             if ($isSupportPagedResult)
@@ -405,6 +416,7 @@ class ldapAuthDriver extends AbstractAuthDriver
     // $baseGroup = "/"
     public function listUsersPaginated($baseGroup, $regexp, $offset, $limit, $recursive = true)
     {
+
         if (!empty($this->hasGroupsMapping)) {
             if ($baseGroup == "/") {
                 $this->dynamicFilter = "!(".$this->hasGroupsMapping."=*)";
@@ -417,6 +429,7 @@ class ldapAuthDriver extends AbstractAuthDriver
         }
 
         $entries = $this->getUserEntries(AJXP_Utils::regexpToLdap($regexp), false, $offset, $limit, true);
+
         $this->dynamicFilter = null;
         $persons = array();
         unset($entries['count']); // remove 'count' entry
@@ -427,8 +440,15 @@ class ldapAuthDriver extends AbstractAuthDriver
         }
         return $persons;
     }
+
     public function getUsersCount($baseGroup = "/", $regexp = "", $filterProperty = null, $filterValue = null, $recursive = true)
     {
+        $check_cache = $this->getCountFromCache();
+
+        if($check_cache > 0){
+            return $check_cache["count"];
+        }
+
         if (!empty($this->hasGroupsMapping)) {
             if ($baseGroup == "/") {
                 $this->dynamicFilter = "!(".$this->hasGroupsMapping."=*)";
@@ -438,10 +458,10 @@ class ldapAuthDriver extends AbstractAuthDriver
         }
 
         $res = $this->getUserEntries(AJXP_Utils::regexpToLdap($regexp), true, null);
+        $this->saveCountToCache($res);
         $this->dynamicFilter = null;
         return $res["count"];
     }
-
 
     /**
      * List children groups of a given group. By default will report this on the CONF driver,
@@ -499,10 +519,19 @@ class ldapAuthDriver extends AbstractAuthDriver
         return $arr;
     }
 
-
     public function listUsers($baseGroup = "/", $recursive = true)
     {
-        return $this->listUsersPaginated($baseGroup, null, -1, -1);
+        /*
+        $file_storage = AJXP_CACHE_DIR."/ldap.ser";
+        if(file_exists($file_storage)){
+            $allUsers = unserialize( file_get_contents($file_storage));
+        }else{
+            $allUsers = $this->listUsersPaginated($baseGroup, null, -1, -1);
+            file_put_contents($file_storage, serialize($allUsers));
+        }*/
+
+        $allUsers = $this->listUsersPaginated($baseGroup, null, -1, -1);
+        return $allUsers;
     }
 
     public function userExists($login)
@@ -548,6 +577,7 @@ class ldapAuthDriver extends AbstractAuthDriver
     {
         return false;
     }
+
     public function passwordsEditable()
     {
         return false;
@@ -645,6 +675,9 @@ class ldapAuthDriver extends AbstractAuthDriver
     public function updateUserObject(&$userObject)
     {
         parent::updateUserObject($userObject);
+        if(strcmp($userObject->getId(), "maisonial01") === 0 ){
+            $test = 1;
+        }
         if(!empty($this->separateGroup)) $userObject->setGroupPath("/".$this->separateGroup);
         // SHOULD BE DEPRECATED
         if (!empty($this->customParamsMapping)) {
@@ -716,6 +749,7 @@ class ldapAuthDriver extends AbstractAuthDriver
                             case "role_id":
                                 $valueFilters = null;
                                 $matchFilter = null;
+
                                 $filter = $params["MAPPING_LOCAL_PARAM"];
                                 if (strpos($filter, "preg:") !== false) {
                                     $matchFilter = "/".str_replace("preg:", "", $filter)."/i";
@@ -741,7 +775,7 @@ class ldapAuthDriver extends AbstractAuthDriver
                                     */
 
                                     foreach ($memberValues as $uniqValue => $fullDN) {
-                                        $uniqValue = $ldap_prefix . $uniqValue;
+                                        $uniqValue = $ldap_prefix.$uniqValue;
                                         if (isSet($matchFilter) && !preg_match($matchFilter, $uniqValue)) continue;
                                         if (isSet($valueFilters) && !in_array($uniqValue, $valueFilters)) continue;
                                         $userObject->addRole(AuthService::getRole($uniqValue, true));
@@ -827,6 +861,7 @@ class ldapAuthDriver extends AbstractAuthDriver
             }
         }
     }
+
     public function fakeMemberOf($conn, $groupDN, $filterString, $atts, &$entry)
     {
         if (!($conn) || !($groupDN)) return null;
@@ -857,5 +892,34 @@ class ldapAuthDriver extends AbstractAuthDriver
             }
             $entry["memberof"] = $memberOf;
         }
+    }
+
+    public function getCountFromCache(){
+        $count = 0;
+        if (file_exists($this->ldap_cache_count_file)){
+            $count = unserialize(file_get_contents($this->ldap_cache_count_file));
+        }
+        return $count;
+    }
+
+    public function saveCountToCache($count){
+        if (file_exists($this->ldap_cache_count_file)){
+            unlink($this->ldap_cache_count_file);
+        }
+        file_put_contents($this->ldap_cache_count_file, serialize($count));
+    }
+
+    public function getUserListPageFromCache($page){
+        if (file_exists($this->ldap_cache_file.$page)){
+            $userList = unserialize(file_get_contents($this->ldap_cache_file.$page));
+        }
+        return $userList;
+    }
+
+    public function saveUserListPageToCache($userList, $page){
+        if (file_exists($this->ldap_cache_file.$page)){
+            unlink($this->ldap_cache_file.$page);
+        }
+        file_put_contents($this->ldap_cache_file.$page, serialize($userList));
     }
 }

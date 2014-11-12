@@ -409,6 +409,11 @@
                 <serverCallback methodName="switchAction"></serverCallback>
             </processing>
         </action>
+
+
+
+
+
 		<action name="switch_language">
 			<gui text="190" title="190" src="flag.png" accessKey="" hasAccessKey="false" iconClass="icon-flag">
 				<context selection="false" dir="" recycle="true" actionBar="false" actionBarGroup="utils" contextMenu="false" infoPanel="false"></context>

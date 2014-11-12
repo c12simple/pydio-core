@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3b2736a-be55-442e-8393-dba9a8160a92" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/conf/bootstrap_context.php" afterPath="$PROJECT_DIR$/core/src/conf/bootstrap_context.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php" afterPath="$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml" afterPath="$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/plugins/core.conf/standard_conf_actions.xml" afterPath="$PROJECT_DIR$/core/src/plugins/core.conf/standard_conf_actions.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pydio-core.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,45 +32,206 @@
       <file leaf-file-name="class.ldapAuthDriver.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="316" column="36" selection-start="12409" selection-end="12409" vertical-scroll-proportion="0.40311173" vertical-offset="4455" max-vertical-offset="12420">
+            <state line="238" column="0" selection-start="9196" selection-end="9196" vertical-scroll-proportion="0.6315789" vertical-offset="375" max-vertical-offset="1395">
               <folding>
-                <element signature="e#14207#15852#0" expanded="false" />
+                <element signature="e#6#784#0" expanded="false" />
+                <element signature="e#838#941#0" expanded="false" />
+                <element signature="e#1554#1628#0" expanded="false" />
+                <element signature="e#1677#1785#0" expanded="false" />
+                <element signature="n#init#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#1987#2132#0" expanded="false" />
+                <element signature="e#3306#3620#0" expanded="false" />
+                <element signature="e#3353#3610#0" expanded="false" />
+                <element signature="e#3412#3596#0" expanded="false" />
+                <element signature="e#3629#4084#0" expanded="false" />
+                <element signature="e#3737#3897#0" expanded="false" />
+                <element signature="e#3908#4084#0" expanded="false" />
+                <element signature="e#3927#4074#0" expanded="false" />
+                <element signature="e#4093#4461#0" expanded="false" />
+                <element signature="e#4214#4378#0" expanded="false" />
+                <element signature="e#4389#4461#0" expanded="false" />
+                <element signature="e#4470#4652#0" expanded="false" />
+                <element signature="e#4594#4652#0" expanded="false" />
+                <element signature="e#4661#4846#0" expanded="false" />
+                <element signature="e#4788#4846#0" expanded="false" />
+                <element signature="n#parseReplicatedParams#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#4976#5594#0" expanded="false" />
+                <element signature="e#5108#5504#0" expanded="false" />
+                <element signature="e#5159#5275#0" expanded="false" />
+                <element signature="e#5292#5490#0" expanded="false" />
+                <element signature="e#5401#5490#0" expanded="false" />
+                <element signature="n#testLDAPConnexion#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#5733#5878#0" expanded="false" />
+                <element signature="e#6281#7433#0" expanded="false" />
+                <element signature="e#6380#7433#0" expanded="false" />
+                <element signature="e#6399#7423#0" expanded="false" />
+                <element signature="e#6579#6869#0" expanded="false" />
+                <element signature="e#6741#6869#0" expanded="false" />
+                <element signature="e#6994#7319#0" expanded="false" />
+                <element signature="e#7171#7319#0" expanded="false" />
+                <element signature="e#7334#7423#0" expanded="false" />
+                <element signature="n#startConnexion#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#7550#7796#0" expanded="false" />
+                <element signature="e#7646#7786#0" expanded="false" />
+                <element signature="n#__deconstruct#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#7886#7967#0" expanded="false" />
+                <element signature="n#LDAP_Connect#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#8128#9188#0" expanded="false" />
+                <element signature="e#8329#8746#0" expanded="false" />
+                <element signature="e#8550#8746#0" expanded="false" />
+                <element signature="e#8760#9002#0" expanded="false" />
+                <element signature="e#8887#9002#0" expanded="false" />
+                <element signature="e#9014#9188#0" expanded="false" />
+                <element signature="n#getUserEntries#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#9337#9829#0" expanded="false" />
+                <element signature="e#9410#9829#0" expanded="false" />
+                <element signature="e#9476#9634#0" expanded="false" />
+                <element signature="e#9838#10117#0" expanded="false" />
+                <element signature="e#10002#10117#0" expanded="false" />
+                <element signature="e#10126#10203#0" expanded="false" />
+                <element signature="e#10237#10440#0" expanded="false" />
+                <element signature="e#10280#10369#0" expanded="false" />
+                <element signature="e#10380#10440#0" expanded="false" />
+                <element signature="e#10498#11011#0" expanded="false" />
+                <element signature="e#10604#10751#0" expanded="false" />
+                <element signature="e#10764#11001#0" expanded="false" />
+                <element signature="e#11020#11141#0" expanded="false" />
+                <element signature="e#11150#11270#0" expanded="false" />
+                <element signature="e#11197#11260#0" expanded="false" />
+                <element signature="e#11279#11352#0" expanded="false" />
+                <element signature="e#11454#11557#0" expanded="false" />
+                <element signature="e#11799#14353#0" expanded="false" />
+                <element signature="e#12028#14058#0" expanded="false" />
+                <element signature="e#12143#12300#0" expanded="false" />
+                <element signature="e#12317#12507#0" expanded="false" />
+                <element signature="e#12641#12841#0" expanded="false" />
+                <element signature="e#12859#14044#0" expanded="false" />
+                <element signature="e#13021#13889#0" expanded="false" />
+                <element signature="e#13076#13218#0" expanded="false" />
+                <element signature="e#13285#13658#0" expanded="false" />
+                <element signature="e#14114#14250#0" expanded="false" />
+                <element signature="e#14550#16195#0" expanded="false" />
+                <element signature="n#userSortFunction#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="n#supportsUsersPagination#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="n#listUsersPaginated#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#16608#17014#0" expanded="false" />
+                <element signature="e#16659#16882#0" expanded="false" />
+                <element signature="e#16773#16882#0" expanded="false" />
+                <element signature="e#16899#17014#0" expanded="false" />
+                <element signature="e#17255#17470#0" expanded="false" />
+                <element signature="n#getUsersCount#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#17699#17772#0" expanded="false" />
+                <element signature="e#17782#18066#0" expanded="false" />
+                <element signature="e#17833#18056#0" expanded="false" />
+                <element signature="e#17947#18056#0" expanded="false" />
+                <element signature="e#18270#18511#0" expanded="false" />
+                <element signature="n#listChildrenGroups#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#18607#18755#0" expanded="false" />
+                <element signature="e#18764#20368#0" expanded="false" />
+                <element signature="e#19110#19400#0" expanded="false" />
+                <element signature="e#19238#19400#0" expanded="false" />
+                <element signature="e#19597#20187#0" expanded="false" />
+                <element signature="e#19997#20108#0" expanded="false" />
+                <element signature="n#listUsers#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#20479#20817#0" expanded="false" />
+                <element signature="n#userExists#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#20978#21052#0" expanded="false" />
+                <element signature="e#21312#21384#0" expanded="false" />
+                <element signature="e#21489#21717#0" expanded="false" />
+                <element signature="e#21620#21717#0" expanded="false" />
+                <element signature="n#checkPassword#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#21990#22483#0" expanded="false" />
+                <element signature="e#22029#22231#0" expanded="false" />
+                <element signature="e#22353#22483#0" expanded="false" />
+                <element signature="n#usersEditable#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="n#passwordsEditable#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="n#buildGroupBranch#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#23440#24399#0" expanded="false" />
+                <element signature="e#24768#26226#0" expanded="false" />
+                <element signature="e#24807#24917#0" expanded="false" />
+                <element signature="e#24930#26204#0" expanded="false" />
+                <element signature="e#24982#26190#0" expanded="false" />
+                <element signature="e#25185#25776#0" expanded="false" />
+                <element signature="e#25304#25588#0" expanded="false" />
+                <element signature="e#25613#25754#0" expanded="false" />
+                <element signature="e#25797#26172#0" expanded="false" />
+                <element signature="e#25970#26081#0" expanded="false" />
+                <element signature="n#updateUserObject#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#26347#26435#0" expanded="false" />
+                <element signature="e#26570#27624#0" expanded="false" />
+                <element signature="e#26754#26826#0" expanded="false" />
+                <element signature="e#26921#27026#0" expanded="false" />
+                <element signature="e#27137#27472#0" expanded="false" />
+                <element signature="e#27216#27458#0" expanded="false" />
+                <element signature="e#27293#27440#0" expanded="false" />
+                <element signature="e#27485#27614#0" expanded="false" />
+                <element signature="e#27633#36749#0" expanded="false" />
+                <element signature="e#27780#36649#0" expanded="false" />
+                <element signature="e#27859#36635#0" expanded="false" />
+                <element signature="e#27993#36617#0" expanded="false" />
+                <element signature="e#28145#29513#0" expanded="false" />
+                <element signature="e#29538#36595#0" expanded="false" />
+                <element signature="e#29607#32622#0" expanded="false" />
+                <element signature="e#32651#35241#0" expanded="false" />
+                <element signature="e#35270#35638#0" expanded="false" />
+                <element signature="e#35716#36569#0" expanded="false" />
+                <element signature="e#36662#36739#0" expanded="false" />
+                <element signature="n#fakeMemberOf#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#37011#37442#0" expanded="false" />
+                <element signature="e#37195#37432#0" expanded="false" />
+                <element signature="e#37322#37418#0" expanded="false" />
+                <element signature="e#37451#37883#0" expanded="false" />
+                <element signature="e#37513#37696#0" expanded="false" />
+                <element signature="e#37570#37682#0" expanded="false" />
+                <element signature="e#37709#37829#0" expanded="false" />
+                <element signature="n#getCountFromCache#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#37960#38100#0" expanded="false" />
+                <element signature="n#saveCountToCache#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#38185#38292#0" expanded="false" />
+                <element signature="n#getUserListPageFromCache#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#38437#38580#0" expanded="false" />
+                <element signature="n#saveUserListPageToCache#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+                <element signature="e#38685#38792#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap_context.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/conf/bootstrap_context.php">
+      <file leaf-file-name="class.ajxp_confAccessDriver.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/plugins/access.ajxp_conf/class.ajxp_confAccessDriver.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="39" selection-start="2994" selection-end="2994" vertical-scroll-proportion="-26.875" vertical-offset="360" max-vertical-offset="2040">
+            <state line="1845" column="0" selection-start="96075" selection-end="96075" vertical-scroll-proportion="-359.375" vertical-offset="19050" max-vertical-offset="35640">
+              <folding>
+                <marker date="1415632402652" expanded="true" signature="86988:87297" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="88384:88693" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="90580:91167" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="94230:94855" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="95041:95801" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="100764:101067" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="104312:104616" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="108623:108739" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="109637:109851" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="111289:111542" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="114989:115581" placeholder="..." />
+                <marker date="1415632402652" expanded="true" signature="117354:118142" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="class.AJXP_Plugin.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/core/classes/class.AJXP_Plugin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="414" column="0" selection-start="15459" selection-end="15459" vertical-scroll-proportion="-7.0416665" vertical-offset="6041" max-vertical-offset="14400">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.multi/manifest.xml">
+      <file leaf-file-name="class.AbstractAuthDriver.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/plugins/core.auth/class.AbstractAuthDriver.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2205">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="manifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="233" selection-start="2252" selection-end="2252" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../pyuni/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="11" selection-start="1371" selection-end="1371" vertical-scroll-proportion="27.375" vertical-offset="1122" max-vertical-offset="2490">
+            <state line="165" column="28" selection-start="5608" selection-end="5626" vertical-scroll-proportion="-0.7083333" vertical-offset="2458" max-vertical-offset="4950">
               <folding />
             </state>
           </provider>
@@ -76,7 +240,7 @@
       <file leaf-file-name="class.multiAuthDriver.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.multi/class.multiAuthDriver.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="287" column="0" selection-start="11321" selection-end="11321" vertical-scroll-proportion="-2.1923077" vertical-offset="4191" max-vertical-offset="7410">
+            <state line="228" column="143" selection-start="8491" selection-end="8491" vertical-scroll-proportion="2.8269231" vertical-offset="3567" max-vertical-offset="7410">
               <folding />
             </state>
           </provider>
@@ -85,7 +249,228 @@
       <file leaf-file-name="class.AbstractConfDriver.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/plugins/core.conf/class.AbstractConfDriver.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1067" column="46" selection-start="46918" selection-end="46918" vertical-scroll-proportion="5.0576925" vertical-offset="16268" max-vertical-offset="18420">
+            <state line="393" column="12" selection-start="14314" selection-end="14314" vertical-scroll-proportion="-3.9423077" vertical-offset="1160" max-vertical-offset="3555">
+              <folding>
+                <element signature="e#6#820#0" expanded="false" />
+                <element signature="e#874#1047#0" expanded="false" />
+                <element signature="n#init#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+                <element signature="e#1338#2037#0" expanded="false" />
+                <element signature="e#1516#1993#0" expanded="false" />
+                <element signature="n#parseSpecificContributions#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+                <element signature="e#2183#2631#0" expanded="false" />
+                <element signature="e#2500#2621#0" expanded="false" />
+                <element signature="e#2723#3194#0" expanded="false" />
+                <element signature="e#3016#3184#0" expanded="false" />
+                <element signature="e#3349#3466#0" expanded="false" />
+                <element signature="e#3475#3922#0" expanded="false" />
+                <element signature="e#3744#3912#0" expanded="false" />
+                <element signature="e#4156#4697#0" expanded="false" />
+                <element signature="e#4243#4697#0" expanded="false" />
+                <element signature="e#4428#4528#0" expanded="false" />
+                <element signature="e#4738#5107#0" expanded="false" />
+                <element signature="e#5152#6068#0" expanded="false" />
+                <element signature="e#5470#5638#0" expanded="false" />
+                <element signature="e#5890#6058#0" expanded="false" />
+                <element signature="e#6107#7402#0" expanded="false" />
+                <element signature="e#6408#6576#0" expanded="false" />
+                <element signature="e#6816#6984#0" expanded="false" />
+                <element signature="e#7224#7392#0" expanded="false" />
+                <element signature="e#7472#7675#0" expanded="false" />
+                <element signature="n#loadPluginConfig#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+                <element signature="e#7781#8116#0" expanded="false" />
+                <element signature="e#7908#8106#0" expanded="false" />
+                <element signature="e#7952#8055#0" expanded="false" />
+                <element signature="e#8125#8484#0" expanded="false" />
+                <element signature="e#8276#8474#0" expanded="false" />
+                <element signature="e#8320#8423#0" expanded="false" />
+                <element signature="e#8493#8767#0" expanded="false" />
+                <element signature="e#8674#8767#0" expanded="false" />
+                <element signature="e#8875#9014#0" expanded="false" />
+                <element signature="n#savePluginConfig#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+                <element signature="e#9087#9307#0" expanded="false" />
+                <element signature="e#9232#9307#0" expanded="false" />
+                <element signature="e#9319#9381#0" expanded="false" />
+                <element signature="n#pluginUsesBootConf#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+                <element signature="e#9607#9679#0" expanded="false" />
+                <element signature="e#9803#9982#0" expanded="false" />
+                <element signature="e#10049#10759#0" expanded="false" />
+                <element signature="e#10836#10965#0" expanded="false" />
+                <element signature="e#11033#11160#0" expanded="false" />
+                <element signature="e#11233#11392#0" expanded="false" />
+                <element signature="e#11478#11580#0" expanded="false" />
+                <element signature="e#11648#11831#0" expanded="false" />
+                <element signature="e#11997#12075#0" expanded="false" />
+                <element signature="e#12129#12214#0" expanded="false" />
+                <element signature="e#12268#12303#0" expanded="false" />
+                <element signature="e#12357#12496#0" expanded="false" />
+                <element signature="e#12576#12718#0" expanded="false" />
+                <element signature="e#12802#12907#0" expanded="false" />
+                <element signature="e#12971#13135#0" expanded="false" />
+                <element signature="e#13222#13329#0" expanded="false" />
+                <element signature="e#13400#13509#0" expanded="false" />
+                <element signature="e#13582#13693#0" expanded="false" />
+                <element signature="e#13771#13892#0" expanded="false" />
+                <element signature="e#14101#14210#0" expanded="false" />
+                <element signature="e#14417#14537#0" expanded="false" />
+                <element signature="e#14613#14727#0" expanded="false" />
+                <element signature="e#14854#14938#0" expanded="false" />
+                <element signature="e#14999#15085#0" expanded="false" />
+                <element signature="e#15158#15281#0" expanded="false" />
+                <element signature="e#15375#15515#0" expanded="false" />
+                <element signature="e#15624#15721#0" expanded="false" />
+                <element signature="e#15794#15867#0" expanded="false" />
+                <element signature="e#15928#16041#0" expanded="false" />
+                <element signature="e#16116#16183#0" expanded="false" />
+                <element signature="n#getOption#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+                <element signature="e#16395#16472#0" expanded="false" />
+                <element signature="n#getExposedPreferences#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+                <element signature="e#16557#16799#0" expanded="false" />
+                <element signature="e#16933#17080#0" expanded="false" />
+                <element signature="e#17089#17475#0" expanded="false" />
+                <element signature="e#17484#17911#0" expanded="false" />
+                <element signature="e#17530#17826#0" expanded="false" />
+                <element signature="e#17752#17826#0" expanded="false" />
+                <element signature="e#17920#18055#0" expanded="false" />
+                <element signature="e#18227#19015#0" expanded="false" />
+                <element signature="e#18290#19005#0" expanded="false" />
+                <element signature="e#18342#18991#0" expanded="false" />
+                <element signature="e#18545#18687#0" expanded="false" />
+                <element signature="e#19202#19315#0" expanded="false" />
+                <element signature="e#19634#20815#0" expanded="false" />
+                <element signature="e#19677#19751#0" expanded="false" />
+                <element signature="e#19881#20046#0" expanded="false" />
+                <element signature="e#20298#20646#0" expanded="false" />
+                <element signature="e#21002#23091#0" expanded="false" />
+                <element signature="e#21437#21563#0" expanded="false" />
+                <element signature="e#21609#21744#0" expanded="false" />
+                <element signature="e#21761#23067#0" expanded="false" />
+                <element signature="e#21859#22483#0" expanded="false" />
+                <element signature="e#22112#22483#0" expanded="false" />
+                <element signature="e#22236#22392#0" expanded="false" />
+                <element signature="e#22502#23067#0" expanded="false" />
+                <element signature="e#22608#23049#0" expanded="false" />
+                <element signature="e#22852#23049#0" expanded="false" />
+                <element signature="e#23676#23807#0" expanded="false" />
+                <element signature="e#23887#23986#0" expanded="false" />
+                <element signature="e#24005#26016#0" expanded="false" />
+                <element signature="e#24177#25533#0" expanded="false" />
+                <element signature="e#24576#24848#0" expanded="false" />
+                <element signature="e#24876#25533#0" expanded="false" />
+                <element signature="e#25009#25248#0" expanded="false" />
+                <element signature="e#25276#25533#0" expanded="false" />
+                <element signature="e#25687#25998#0" expanded="false" />
+                <element signature="e#25894#25998#0" expanded="false" />
+                <element signature="e#26411#27449#0" expanded="false" />
+                <element signature="e#26535#27341#0" expanded="false" />
+                <element signature="e#26919#27064#0" expanded="false" />
+                <element signature="e#27638#33670#0" expanded="false" />
+                <element signature="e#27714#30635#0" expanded="false" />
+                <element signature="e#28152#28325#0" expanded="false" />
+                <element signature="e#28346#28488#0" expanded="false" />
+                <element signature="e#28716#29004#0" expanded="false" />
+                <element signature="e#28870#28982#0" expanded="false" />
+                <element signature="e#29538#30635#0" expanded="false" />
+                <element signature="e#29826#29951#0" expanded="false" />
+                <element signature="e#30068#30225#0" expanded="false" />
+                <element signature="e#30246#30387#0" expanded="false" />
+                <element signature="e#30407#30635#0" expanded="false" />
+                <element signature="e#30858#32020#0" expanded="false" />
+                <element signature="e#30929#32002#0" expanded="false" />
+                <element signature="e#30989#31980#0" expanded="false" />
+                <element signature="e#31216#31374#0" expanded="false" />
+                <element signature="e#31471#31954#0" expanded="false" />
+                <element signature="e#32037#32353#0" expanded="false" />
+                <element signature="e#32215#32335#0" expanded="false" />
+                <element signature="e#32371#33646#0" expanded="false" />
+                <element signature="e#32548#33406#0" expanded="false" />
+                <element signature="e#32773#33384#0" expanded="false" />
+                <element signature="e#33462#33646#0" expanded="false" />
+                <element signature="e#33684#34777#0" expanded="false" />
+                <element signature="e#33726#33840#0" expanded="false" />
+                <element signature="e#33905#34022#0" expanded="false" />
+                <element signature="e#34131#34280#0" expanded="false" />
+                <element signature="e#34481#34647#0" expanded="false" />
+                <element signature="e#34927#38329#0" expanded="false" />
+                <element signature="e#35187#35424#0" expanded="false" />
+                <element signature="e#35338#35424#0" expanded="false" />
+                <element signature="e#35653#36790#0" expanded="false" />
+                <element signature="e#35744#36061#0" expanded="false" />
+                <element signature="e#35887#35983#0" expanded="false" />
+                <element signature="e#36082#36653#0" expanded="false" />
+                <element signature="e#36208#36577#0" expanded="false" />
+                <element signature="e#36807#37000#0" expanded="false" />
+                <element signature="e#37178#37775#0" expanded="false" />
+                <element signature="e#37423#37757#0" expanded="false" />
+                <element signature="e#37801#38197#0" expanded="false" />
+                <element signature="e#38343#40071#0" expanded="false" />
+                <element signature="e#38642#40047#0" expanded="false" />
+                <element signature="e#39329#40047#0" expanded="false" />
+                <element signature="e#40085#42292#0" expanded="false" />
+                <element signature="e#40221#40348#0" expanded="false" />
+                <element signature="e#40285#40347#1" expanded="false" />
+                <element signature="e#40427#42204#0" expanded="false" />
+                <element signature="e#41166#41948#0" expanded="false" />
+                <element signature="e#41290#41622#0" expanded="false" />
+                <element signature="e#41355#41558#0" expanded="false" />
+                <element signature="e#42306#43819#0" expanded="false" />
+                <element signature="e#42840#42930#0" expanded="false" />
+                <element signature="e#43049#43754#0" expanded="false" />
+                <element signature="e#43152#43754#0" expanded="false" />
+                <element signature="e#43833#45018#0" expanded="false" />
+                <element signature="e#44007#44221#0" expanded="false" />
+                <element signature="e#44343#44953#0" expanded="false" />
+                <element signature="e#44446#44953#0" expanded="false" />
+                <element signature="e#45032#45544#0" expanded="false" />
+                <element signature="e#45214#45438#0" expanded="false" />
+                <element signature="e#45558#51445#0" expanded="false" />
+                <element signature="e#45698#45800#0" expanded="false" />
+                <element signature="e#46131#46323#0" expanded="false" />
+                <element signature="e#46654#46816#0" expanded="false" />
+                <element signature="e#46979#48049#0" expanded="false" />
+                <element signature="e#47429#47622#0" expanded="false" />
+                <element signature="e#47744#48031#0" expanded="false" />
+                <element signature="e#47787#48009#0" expanded="false" />
+                <element signature="e#48123#48786#0" expanded="false" />
+                <element signature="e#48533#48786#0" expanded="false" />
+                <element signature="e#48855#49081#0" expanded="false" />
+                <element signature="e#49098#49546#0" expanded="false" />
+                <element signature="e#49137#49528#0" expanded="false" />
+                <element signature="e#49211#49506#0" expanded="false" />
+                <element signature="e#49563#49984#0" expanded="false" />
+                <element signature="e#49700#49966#0" expanded="false" />
+                <element signature="e#50001#51261#0" expanded="false" />
+                <element signature="e#50148#51195#0" expanded="false" />
+                <element signature="e#50783#50961#0" expanded="false" />
+                <element signature="e#51278#51367#0" expanded="false" />
+                <element signature="e#51459#52118#0" expanded="false" />
+                <element signature="e#51592#51990#0" expanded="false" />
+                <element signature="e#51793#51972#0" expanded="false" />
+                <element signature="e#52132#53006#0" expanded="false" />
+                <element signature="e#52175#52983#0" expanded="false" />
+                <element signature="e#52338#52478#0" expanded="false" />
+                <element signature="e#52502#52983#0" expanded="false" />
+                <element signature="e#52559#52892#0" expanded="false" />
+                <element signature="e#52773#52892#0" expanded="false" />
+                <element signature="e#53020#53546#0" expanded="false" />
+                <element signature="e#53070#53523#0" expanded="false" />
+                <element signature="e#53233#53373#0" expanded="false" />
+                <element signature="e#53397#53523#0" expanded="false" />
+                <element signature="e#53560#54451#0" expanded="false" />
+                <element signature="e#53604#54135#0" expanded="false" />
+                <element signature="e#53821#54117#0" expanded="false" />
+                <element signature="e#53864#54117#0" expanded="false" />
+                <element signature="e#54152#54427#0" expanded="false" />
+                <element signature="e#54516#54719#0" expanded="false" />
+                <element signature="e#54729#54827#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="100" selection-start="2535" selection-end="2535" vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="630">
               <folding />
             </state>
           </provider>
@@ -94,25 +479,25 @@
       <file leaf-file-name="class.AuthService.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/core/classes/class.AuthService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="659" column="42" selection-start="25786" selection-end="25786" vertical-scroll-proportion="-3.1346154" vertical-offset="9722" max-vertical-offset="18990">
+            <state line="647" column="42" selection-start="25280" selection-end="25299" vertical-scroll-proportion="-3.6538463" vertical-offset="9515" max-vertical-offset="18990">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="class.BootConfLoader.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/plugins/boot.conf/class.BootConfLoader.php">
+      <file leaf-file-name="manifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/plugins/core.conf/manifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="509" column="5" selection-start="21639" selection-end="21639" vertical-scroll-proportion="-6.875" vertical-offset="7200" max-vertical-offset="10545">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap_conf.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/conf/bootstrap_conf.php">
+      <file leaf-file-name="standard_conf_actions.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/plugins/core.conf/standard_conf_actions.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="28" selection-start="1256" selection-end="1256" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="675">
+            <state line="414" column="0" selection-start="24870" selection-end="24870" vertical-scroll-proportion="-91.14286" vertical-offset="3658" max-vertical-offset="10050">
               <folding />
             </state>
           </provider>
@@ -141,10 +526,11 @@
         <option value="$PROJECT_DIR$/core/src/plugins/conf.serial/class.serialConfDriver.php" />
         <option value="$PROJECT_DIR$/core/src/plugins/boot.conf/class.BootConfLoader.php" />
         <option value="$PROJECT_DIR$/core/src/conf/bootstrap_conf.php" />
-        <option value="$PROJECT_DIR$/core/src/plugins/core.conf/class.AbstractConfDriver.php" />
         <option value="$PROJECT_DIR$/core/src/core/classes/class.AuthService.php" />
-        <option value="$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml" />
         <option value="$PROJECT_DIR$/core/src/conf/bootstrap_context.php" />
+        <option value="$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml" />
+        <option value="$PROJECT_DIR$/core/src/plugins/core.conf/standard_conf_actions.xml" />
+        <option value="$PROJECT_DIR$/core/src/plugins/core.conf/class.AbstractConfDriver.php" />
         <option value="$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php" />
       </list>
     </option>
@@ -157,7 +543,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="local" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="1415" />
+    <option name="x" value="-1871" />
     <option name="y" value="-4" />
     <option name="width" value="1871" />
     <option name="height" value="1084" />
@@ -260,6 +646,180 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core.conf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conf.sql" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="auth.multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="auth.ldap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pydio-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="conf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -322,22 +882,22 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1415" y="-4" width="1871" height="1084" extended-state="6" />
-    <editor active="false" />
+    <frame x="-1871" y="-4" width="1871" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1879543" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30114228" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3084112" sideWeight="0.8857368" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28660437" sideWeight="0.8857368" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4623656" sideWeight="0.1142632" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25756457" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22088572" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22088572" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -364,36 +924,73 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="php">
+          <url>file://$PROJECT_DIR$/core/src/plugins/auth.multi/class.multiAuthDriver.php</url>
+          <line>223</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/core/src/core/classes/class.AuthService.php</url>
+          <line>965</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/core/src/plugins/auth.multi/class.multiAuthDriver.php</url>
+          <line>254</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/core/src/plugins/auth.multi/class.multiAuthDriver.php</url>
+          <line>260</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="6" />
+      <option name="time" value="44" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/plugins/conf.sql/class.AJXP_SqlUser.php">
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/conf.serial/class.serialConfDriver.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8115">
-          <folding>
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [grou..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [repo..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [name..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [repo..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [u.lo..." />
-          </folding>
+        <state line="144" column="100" selection-start="5376" selection-end="5376" vertical-scroll-proportion="-7.7916665" vertical-offset="1703" max-vertical-offset="10155">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/boot.conf/class.BootConfLoader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="509" column="5" selection-start="21639" selection-end="21639" vertical-scroll-proportion="-6.875" vertical-offset="7200" max-vertical-offset="10545">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/conf/bootstrap_conf.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="28" selection-start="1256" selection-end="1256" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="675">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../pyuni/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="11" selection-start="1371" selection-end="1371" vertical-scroll-proportion="27.375" vertical-offset="1122" max-vertical-offset="2490">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.multi/manifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2205">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/plugins/conf.sql/class.sqlConfDriver.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="622" column="71" selection-start="25319" selection-end="25319" vertical-scroll-proportion="-8.458333" vertical-offset="8857" max-vertical-offset="16530">
+        <state line="487" column="50" selection-start="19503" selection-end="19520" vertical-scroll-proportion="-4.1153846" vertical-offset="6821" max-vertical-offset="16530">
           <folding>
             <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
             <marker date="1415634368530" expanded="true" signature="-1:-1" placeholder="SELECT COUNT..." />
@@ -465,81 +1062,490 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/plugins/conf.serial/class.serialConfDriver.php">
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/conf.sql/class.AJXP_SqlUser.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="100" selection-start="5376" selection-end="5376" vertical-scroll-proportion="-7.7916665" vertical-offset="1703" max-vertical-offset="10155">
-          <folding />
+        <state line="536" column="56" selection-start="20378" selection-end="20378" vertical-scroll-proportion="-16.333334" vertical-offset="7378" max-vertical-offset="8115">
+          <folding>
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [grou..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [repo..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [name..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [repo..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1415632402716" expanded="true" signature="-1:-1" placeholder="SELECT [u.lo..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/plugins/boot.conf/class.BootConfLoader.php">
+    <entry file="file://$PROJECT_DIR$/core/src/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="509" column="5" selection-start="21639" selection-end="21639" vertical-scroll-proportion="-6.875" vertical-offset="7200" max-vertical-offset="10545">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/conf/bootstrap_conf.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="28" selection-start="1256" selection-end="1256" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="675">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../pyuni/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="11" selection-start="1371" selection-end="1371" vertical-scroll-proportion="27.375" vertical-offset="1122" max-vertical-offset="2490">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/plugins/core.conf/class.AbstractConfDriver.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1067" column="46" selection-start="46918" selection-end="46918" vertical-scroll-proportion="5.0576925" vertical-offset="16268" max-vertical-offset="18420">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/core/classes/class.AuthService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="659" column="42" selection-start="25786" selection-end="25786" vertical-scroll-proportion="-3.1346154" vertical-offset="9722" max-vertical-offset="18990">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.multi/class.multiAuthDriver.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="287" column="0" selection-start="11321" selection-end="11321" vertical-scroll-proportion="-2.1923077" vertical-offset="4191" max-vertical-offset="7410">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.multi/manifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2205">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="233" selection-start="2252" selection-end="2252" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
+        <state line="23" column="30" selection-start="995" selection-end="995" vertical-scroll-proportion="23.666666" vertical-offset="913" max-vertical-offset="2490">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/conf/bootstrap_context.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="39" selection-start="2994" selection-end="2994" vertical-scroll-proportion="-26.875" vertical-offset="360" max-vertical-offset="2040">
+        <state line="40" column="22" selection-start="1535" selection-end="1549" vertical-scroll-proportion="5.0" vertical-offset="720" max-vertical-offset="2040">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/core.conf/manifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/core.conf/standard_conf_actions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="414" column="0" selection-start="24870" selection-end="24870" vertical-scroll-proportion="-91.14286" vertical-offset="3658" max-vertical-offset="10050">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/core/classes/class.AJXP_Plugin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="414" column="0" selection-start="15459" selection-end="15459" vertical-scroll-proportion="-7.0416665" vertical-offset="6041" max-vertical-offset="14400">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/access.ajxp_conf/class.ajxp_confAccessDriver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1845" column="0" selection-start="96075" selection-end="96075" vertical-scroll-proportion="-359.375" vertical-offset="19050" max-vertical-offset="35640">
+          <folding>
+            <marker date="1415632402652" expanded="true" signature="86988:87297" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="88384:88693" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="90580:91167" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="94230:94855" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="95041:95801" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="100764:101067" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="104312:104616" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="108623:108739" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="109637:109851" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="111289:111542" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="114989:115581" placeholder="..." />
+            <marker date="1415632402652" expanded="true" signature="117354:118142" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/core.auth/class.AbstractAuthDriver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="165" column="28" selection-start="5608" selection-end="5626" vertical-scroll-proportion="-0.7083333" vertical-offset="2458" max-vertical-offset="4950">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.multi/class.multiAuthDriver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="228" column="143" selection-start="8491" selection-end="8491" vertical-scroll-proportion="2.8269231" vertical-offset="3567" max-vertical-offset="7410">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/core/classes/class.AuthService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="647" column="42" selection-start="25280" selection-end="25299" vertical-scroll-proportion="-3.6538463" vertical-offset="9515" max-vertical-offset="18990">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/core.conf/class.AbstractConfDriver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="393" column="12" selection-start="14314" selection-end="14314" vertical-scroll-proportion="-3.9423077" vertical-offset="1160" max-vertical-offset="3555">
+          <folding>
+            <element signature="e#6#820#0" expanded="false" />
+            <element signature="e#874#1047#0" expanded="false" />
+            <element signature="n#init#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+            <element signature="e#1338#2037#0" expanded="false" />
+            <element signature="e#1516#1993#0" expanded="false" />
+            <element signature="n#parseSpecificContributions#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+            <element signature="e#2183#2631#0" expanded="false" />
+            <element signature="e#2500#2621#0" expanded="false" />
+            <element signature="e#2723#3194#0" expanded="false" />
+            <element signature="e#3016#3184#0" expanded="false" />
+            <element signature="e#3349#3466#0" expanded="false" />
+            <element signature="e#3475#3922#0" expanded="false" />
+            <element signature="e#3744#3912#0" expanded="false" />
+            <element signature="e#4156#4697#0" expanded="false" />
+            <element signature="e#4243#4697#0" expanded="false" />
+            <element signature="e#4428#4528#0" expanded="false" />
+            <element signature="e#4738#5107#0" expanded="false" />
+            <element signature="e#5152#6068#0" expanded="false" />
+            <element signature="e#5470#5638#0" expanded="false" />
+            <element signature="e#5890#6058#0" expanded="false" />
+            <element signature="e#6107#7402#0" expanded="false" />
+            <element signature="e#6408#6576#0" expanded="false" />
+            <element signature="e#6816#6984#0" expanded="false" />
+            <element signature="e#7224#7392#0" expanded="false" />
+            <element signature="e#7472#7675#0" expanded="false" />
+            <element signature="n#loadPluginConfig#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+            <element signature="e#7781#8116#0" expanded="false" />
+            <element signature="e#7908#8106#0" expanded="false" />
+            <element signature="e#7952#8055#0" expanded="false" />
+            <element signature="e#8125#8484#0" expanded="false" />
+            <element signature="e#8276#8474#0" expanded="false" />
+            <element signature="e#8320#8423#0" expanded="false" />
+            <element signature="e#8493#8767#0" expanded="false" />
+            <element signature="e#8674#8767#0" expanded="false" />
+            <element signature="e#8875#9014#0" expanded="false" />
+            <element signature="n#savePluginConfig#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+            <element signature="e#9087#9307#0" expanded="false" />
+            <element signature="e#9232#9307#0" expanded="false" />
+            <element signature="e#9319#9381#0" expanded="false" />
+            <element signature="n#pluginUsesBootConf#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+            <element signature="e#9607#9679#0" expanded="false" />
+            <element signature="e#9803#9982#0" expanded="false" />
+            <element signature="e#10049#10759#0" expanded="false" />
+            <element signature="e#10836#10965#0" expanded="false" />
+            <element signature="e#11033#11160#0" expanded="false" />
+            <element signature="e#11233#11392#0" expanded="false" />
+            <element signature="e#11478#11580#0" expanded="false" />
+            <element signature="e#11648#11831#0" expanded="false" />
+            <element signature="e#11997#12075#0" expanded="false" />
+            <element signature="e#12129#12214#0" expanded="false" />
+            <element signature="e#12268#12303#0" expanded="false" />
+            <element signature="e#12357#12496#0" expanded="false" />
+            <element signature="e#12576#12718#0" expanded="false" />
+            <element signature="e#12802#12907#0" expanded="false" />
+            <element signature="e#12971#13135#0" expanded="false" />
+            <element signature="e#13222#13329#0" expanded="false" />
+            <element signature="e#13400#13509#0" expanded="false" />
+            <element signature="e#13582#13693#0" expanded="false" />
+            <element signature="e#13771#13892#0" expanded="false" />
+            <element signature="e#14101#14210#0" expanded="false" />
+            <element signature="e#14417#14537#0" expanded="false" />
+            <element signature="e#14613#14727#0" expanded="false" />
+            <element signature="e#14854#14938#0" expanded="false" />
+            <element signature="e#14999#15085#0" expanded="false" />
+            <element signature="e#15158#15281#0" expanded="false" />
+            <element signature="e#15375#15515#0" expanded="false" />
+            <element signature="e#15624#15721#0" expanded="false" />
+            <element signature="e#15794#15867#0" expanded="false" />
+            <element signature="e#15928#16041#0" expanded="false" />
+            <element signature="e#16116#16183#0" expanded="false" />
+            <element signature="n#getOption#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+            <element signature="e#16395#16472#0" expanded="false" />
+            <element signature="n#getExposedPreferences#0;n#AbstractConfDriver#0;n#!!top" expanded="false" />
+            <element signature="e#16557#16799#0" expanded="false" />
+            <element signature="e#16933#17080#0" expanded="false" />
+            <element signature="e#17089#17475#0" expanded="false" />
+            <element signature="e#17484#17911#0" expanded="false" />
+            <element signature="e#17530#17826#0" expanded="false" />
+            <element signature="e#17752#17826#0" expanded="false" />
+            <element signature="e#17920#18055#0" expanded="false" />
+            <element signature="e#18227#19015#0" expanded="false" />
+            <element signature="e#18290#19005#0" expanded="false" />
+            <element signature="e#18342#18991#0" expanded="false" />
+            <element signature="e#18545#18687#0" expanded="false" />
+            <element signature="e#19202#19315#0" expanded="false" />
+            <element signature="e#19634#20815#0" expanded="false" />
+            <element signature="e#19677#19751#0" expanded="false" />
+            <element signature="e#19881#20046#0" expanded="false" />
+            <element signature="e#20298#20646#0" expanded="false" />
+            <element signature="e#21002#23091#0" expanded="false" />
+            <element signature="e#21437#21563#0" expanded="false" />
+            <element signature="e#21609#21744#0" expanded="false" />
+            <element signature="e#21761#23067#0" expanded="false" />
+            <element signature="e#21859#22483#0" expanded="false" />
+            <element signature="e#22112#22483#0" expanded="false" />
+            <element signature="e#22236#22392#0" expanded="false" />
+            <element signature="e#22502#23067#0" expanded="false" />
+            <element signature="e#22608#23049#0" expanded="false" />
+            <element signature="e#22852#23049#0" expanded="false" />
+            <element signature="e#23676#23807#0" expanded="false" />
+            <element signature="e#23887#23986#0" expanded="false" />
+            <element signature="e#24005#26016#0" expanded="false" />
+            <element signature="e#24177#25533#0" expanded="false" />
+            <element signature="e#24576#24848#0" expanded="false" />
+            <element signature="e#24876#25533#0" expanded="false" />
+            <element signature="e#25009#25248#0" expanded="false" />
+            <element signature="e#25276#25533#0" expanded="false" />
+            <element signature="e#25687#25998#0" expanded="false" />
+            <element signature="e#25894#25998#0" expanded="false" />
+            <element signature="e#26411#27449#0" expanded="false" />
+            <element signature="e#26535#27341#0" expanded="false" />
+            <element signature="e#26919#27064#0" expanded="false" />
+            <element signature="e#27638#33670#0" expanded="false" />
+            <element signature="e#27714#30635#0" expanded="false" />
+            <element signature="e#28152#28325#0" expanded="false" />
+            <element signature="e#28346#28488#0" expanded="false" />
+            <element signature="e#28716#29004#0" expanded="false" />
+            <element signature="e#28870#28982#0" expanded="false" />
+            <element signature="e#29538#30635#0" expanded="false" />
+            <element signature="e#29826#29951#0" expanded="false" />
+            <element signature="e#30068#30225#0" expanded="false" />
+            <element signature="e#30246#30387#0" expanded="false" />
+            <element signature="e#30407#30635#0" expanded="false" />
+            <element signature="e#30858#32020#0" expanded="false" />
+            <element signature="e#30929#32002#0" expanded="false" />
+            <element signature="e#30989#31980#0" expanded="false" />
+            <element signature="e#31216#31374#0" expanded="false" />
+            <element signature="e#31471#31954#0" expanded="false" />
+            <element signature="e#32037#32353#0" expanded="false" />
+            <element signature="e#32215#32335#0" expanded="false" />
+            <element signature="e#32371#33646#0" expanded="false" />
+            <element signature="e#32548#33406#0" expanded="false" />
+            <element signature="e#32773#33384#0" expanded="false" />
+            <element signature="e#33462#33646#0" expanded="false" />
+            <element signature="e#33684#34777#0" expanded="false" />
+            <element signature="e#33726#33840#0" expanded="false" />
+            <element signature="e#33905#34022#0" expanded="false" />
+            <element signature="e#34131#34280#0" expanded="false" />
+            <element signature="e#34481#34647#0" expanded="false" />
+            <element signature="e#34927#38329#0" expanded="false" />
+            <element signature="e#35187#35424#0" expanded="false" />
+            <element signature="e#35338#35424#0" expanded="false" />
+            <element signature="e#35653#36790#0" expanded="false" />
+            <element signature="e#35744#36061#0" expanded="false" />
+            <element signature="e#35887#35983#0" expanded="false" />
+            <element signature="e#36082#36653#0" expanded="false" />
+            <element signature="e#36208#36577#0" expanded="false" />
+            <element signature="e#36807#37000#0" expanded="false" />
+            <element signature="e#37178#37775#0" expanded="false" />
+            <element signature="e#37423#37757#0" expanded="false" />
+            <element signature="e#37801#38197#0" expanded="false" />
+            <element signature="e#38343#40071#0" expanded="false" />
+            <element signature="e#38642#40047#0" expanded="false" />
+            <element signature="e#39329#40047#0" expanded="false" />
+            <element signature="e#40085#42292#0" expanded="false" />
+            <element signature="e#40221#40348#0" expanded="false" />
+            <element signature="e#40285#40347#1" expanded="false" />
+            <element signature="e#40427#42204#0" expanded="false" />
+            <element signature="e#41166#41948#0" expanded="false" />
+            <element signature="e#41290#41622#0" expanded="false" />
+            <element signature="e#41355#41558#0" expanded="false" />
+            <element signature="e#42306#43819#0" expanded="false" />
+            <element signature="e#42840#42930#0" expanded="false" />
+            <element signature="e#43049#43754#0" expanded="false" />
+            <element signature="e#43152#43754#0" expanded="false" />
+            <element signature="e#43833#45018#0" expanded="false" />
+            <element signature="e#44007#44221#0" expanded="false" />
+            <element signature="e#44343#44953#0" expanded="false" />
+            <element signature="e#44446#44953#0" expanded="false" />
+            <element signature="e#45032#45544#0" expanded="false" />
+            <element signature="e#45214#45438#0" expanded="false" />
+            <element signature="e#45558#51445#0" expanded="false" />
+            <element signature="e#45698#45800#0" expanded="false" />
+            <element signature="e#46131#46323#0" expanded="false" />
+            <element signature="e#46654#46816#0" expanded="false" />
+            <element signature="e#46979#48049#0" expanded="false" />
+            <element signature="e#47429#47622#0" expanded="false" />
+            <element signature="e#47744#48031#0" expanded="false" />
+            <element signature="e#47787#48009#0" expanded="false" />
+            <element signature="e#48123#48786#0" expanded="false" />
+            <element signature="e#48533#48786#0" expanded="false" />
+            <element signature="e#48855#49081#0" expanded="false" />
+            <element signature="e#49098#49546#0" expanded="false" />
+            <element signature="e#49137#49528#0" expanded="false" />
+            <element signature="e#49211#49506#0" expanded="false" />
+            <element signature="e#49563#49984#0" expanded="false" />
+            <element signature="e#49700#49966#0" expanded="false" />
+            <element signature="e#50001#51261#0" expanded="false" />
+            <element signature="e#50148#51195#0" expanded="false" />
+            <element signature="e#50783#50961#0" expanded="false" />
+            <element signature="e#51278#51367#0" expanded="false" />
+            <element signature="e#51459#52118#0" expanded="false" />
+            <element signature="e#51592#51990#0" expanded="false" />
+            <element signature="e#51793#51972#0" expanded="false" />
+            <element signature="e#52132#53006#0" expanded="false" />
+            <element signature="e#52175#52983#0" expanded="false" />
+            <element signature="e#52338#52478#0" expanded="false" />
+            <element signature="e#52502#52983#0" expanded="false" />
+            <element signature="e#52559#52892#0" expanded="false" />
+            <element signature="e#52773#52892#0" expanded="false" />
+            <element signature="e#53020#53546#0" expanded="false" />
+            <element signature="e#53070#53523#0" expanded="false" />
+            <element signature="e#53233#53373#0" expanded="false" />
+            <element signature="e#53397#53523#0" expanded="false" />
+            <element signature="e#53560#54451#0" expanded="false" />
+            <element signature="e#53604#54135#0" expanded="false" />
+            <element signature="e#53821#54117#0" expanded="false" />
+            <element signature="e#53864#54117#0" expanded="false" />
+            <element signature="e#54152#54427#0" expanded="false" />
+            <element signature="e#54516#54719#0" expanded="false" />
+            <element signature="e#54729#54827#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/manifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="100" selection-start="2535" selection-end="2535" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/plugins/auth.ldap/class.ldapAuthDriver.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="316" column="36" selection-start="12409" selection-end="12409" vertical-scroll-proportion="0.40311173" vertical-offset="4455" max-vertical-offset="12420">
+        <state line="238" column="0" selection-start="9196" selection-end="9196" vertical-scroll-proportion="0.6315789" vertical-offset="375" max-vertical-offset="1395">
           <folding>
-            <element signature="e#14207#15852#0" expanded="false" />
+            <element signature="e#6#784#0" expanded="false" />
+            <element signature="e#838#941#0" expanded="false" />
+            <element signature="e#1554#1628#0" expanded="false" />
+            <element signature="e#1677#1785#0" expanded="false" />
+            <element signature="n#init#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#1987#2132#0" expanded="false" />
+            <element signature="e#3306#3620#0" expanded="false" />
+            <element signature="e#3353#3610#0" expanded="false" />
+            <element signature="e#3412#3596#0" expanded="false" />
+            <element signature="e#3629#4084#0" expanded="false" />
+            <element signature="e#3737#3897#0" expanded="false" />
+            <element signature="e#3908#4084#0" expanded="false" />
+            <element signature="e#3927#4074#0" expanded="false" />
+            <element signature="e#4093#4461#0" expanded="false" />
+            <element signature="e#4214#4378#0" expanded="false" />
+            <element signature="e#4389#4461#0" expanded="false" />
+            <element signature="e#4470#4652#0" expanded="false" />
+            <element signature="e#4594#4652#0" expanded="false" />
+            <element signature="e#4661#4846#0" expanded="false" />
+            <element signature="e#4788#4846#0" expanded="false" />
+            <element signature="n#parseReplicatedParams#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#4976#5594#0" expanded="false" />
+            <element signature="e#5108#5504#0" expanded="false" />
+            <element signature="e#5159#5275#0" expanded="false" />
+            <element signature="e#5292#5490#0" expanded="false" />
+            <element signature="e#5401#5490#0" expanded="false" />
+            <element signature="n#testLDAPConnexion#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#5733#5878#0" expanded="false" />
+            <element signature="e#6281#7433#0" expanded="false" />
+            <element signature="e#6380#7433#0" expanded="false" />
+            <element signature="e#6399#7423#0" expanded="false" />
+            <element signature="e#6579#6869#0" expanded="false" />
+            <element signature="e#6741#6869#0" expanded="false" />
+            <element signature="e#6994#7319#0" expanded="false" />
+            <element signature="e#7171#7319#0" expanded="false" />
+            <element signature="e#7334#7423#0" expanded="false" />
+            <element signature="n#startConnexion#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#7550#7796#0" expanded="false" />
+            <element signature="e#7646#7786#0" expanded="false" />
+            <element signature="n#__deconstruct#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#7886#7967#0" expanded="false" />
+            <element signature="n#LDAP_Connect#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#8128#9188#0" expanded="false" />
+            <element signature="e#8329#8746#0" expanded="false" />
+            <element signature="e#8550#8746#0" expanded="false" />
+            <element signature="e#8760#9002#0" expanded="false" />
+            <element signature="e#8887#9002#0" expanded="false" />
+            <element signature="e#9014#9188#0" expanded="false" />
+            <element signature="n#getUserEntries#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#9337#9829#0" expanded="false" />
+            <element signature="e#9410#9829#0" expanded="false" />
+            <element signature="e#9476#9634#0" expanded="false" />
+            <element signature="e#9838#10117#0" expanded="false" />
+            <element signature="e#10002#10117#0" expanded="false" />
+            <element signature="e#10126#10203#0" expanded="false" />
+            <element signature="e#10237#10440#0" expanded="false" />
+            <element signature="e#10280#10369#0" expanded="false" />
+            <element signature="e#10380#10440#0" expanded="false" />
+            <element signature="e#10498#11011#0" expanded="false" />
+            <element signature="e#10604#10751#0" expanded="false" />
+            <element signature="e#10764#11001#0" expanded="false" />
+            <element signature="e#11020#11141#0" expanded="false" />
+            <element signature="e#11150#11270#0" expanded="false" />
+            <element signature="e#11197#11260#0" expanded="false" />
+            <element signature="e#11279#11352#0" expanded="false" />
+            <element signature="e#11454#11557#0" expanded="false" />
+            <element signature="e#11799#14353#0" expanded="false" />
+            <element signature="e#12028#14058#0" expanded="false" />
+            <element signature="e#12143#12300#0" expanded="false" />
+            <element signature="e#12317#12507#0" expanded="false" />
+            <element signature="e#12641#12841#0" expanded="false" />
+            <element signature="e#12859#14044#0" expanded="false" />
+            <element signature="e#13021#13889#0" expanded="false" />
+            <element signature="e#13076#13218#0" expanded="false" />
+            <element signature="e#13285#13658#0" expanded="false" />
+            <element signature="e#14114#14250#0" expanded="false" />
+            <element signature="e#14550#16195#0" expanded="false" />
+            <element signature="n#userSortFunction#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="n#supportsUsersPagination#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="n#listUsersPaginated#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#16608#17014#0" expanded="false" />
+            <element signature="e#16659#16882#0" expanded="false" />
+            <element signature="e#16773#16882#0" expanded="false" />
+            <element signature="e#16899#17014#0" expanded="false" />
+            <element signature="e#17255#17470#0" expanded="false" />
+            <element signature="n#getUsersCount#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#17699#17772#0" expanded="false" />
+            <element signature="e#17782#18066#0" expanded="false" />
+            <element signature="e#17833#18056#0" expanded="false" />
+            <element signature="e#17947#18056#0" expanded="false" />
+            <element signature="e#18270#18511#0" expanded="false" />
+            <element signature="n#listChildrenGroups#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#18607#18755#0" expanded="false" />
+            <element signature="e#18764#20368#0" expanded="false" />
+            <element signature="e#19110#19400#0" expanded="false" />
+            <element signature="e#19238#19400#0" expanded="false" />
+            <element signature="e#19597#20187#0" expanded="false" />
+            <element signature="e#19997#20108#0" expanded="false" />
+            <element signature="n#listUsers#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#20479#20817#0" expanded="false" />
+            <element signature="n#userExists#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#20978#21052#0" expanded="false" />
+            <element signature="e#21312#21384#0" expanded="false" />
+            <element signature="e#21489#21717#0" expanded="false" />
+            <element signature="e#21620#21717#0" expanded="false" />
+            <element signature="n#checkPassword#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#21990#22483#0" expanded="false" />
+            <element signature="e#22029#22231#0" expanded="false" />
+            <element signature="e#22353#22483#0" expanded="false" />
+            <element signature="n#usersEditable#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="n#passwordsEditable#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="n#buildGroupBranch#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#23440#24399#0" expanded="false" />
+            <element signature="e#24768#26226#0" expanded="false" />
+            <element signature="e#24807#24917#0" expanded="false" />
+            <element signature="e#24930#26204#0" expanded="false" />
+            <element signature="e#24982#26190#0" expanded="false" />
+            <element signature="e#25185#25776#0" expanded="false" />
+            <element signature="e#25304#25588#0" expanded="false" />
+            <element signature="e#25613#25754#0" expanded="false" />
+            <element signature="e#25797#26172#0" expanded="false" />
+            <element signature="e#25970#26081#0" expanded="false" />
+            <element signature="n#updateUserObject#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#26347#26435#0" expanded="false" />
+            <element signature="e#26570#27624#0" expanded="false" />
+            <element signature="e#26754#26826#0" expanded="false" />
+            <element signature="e#26921#27026#0" expanded="false" />
+            <element signature="e#27137#27472#0" expanded="false" />
+            <element signature="e#27216#27458#0" expanded="false" />
+            <element signature="e#27293#27440#0" expanded="false" />
+            <element signature="e#27485#27614#0" expanded="false" />
+            <element signature="e#27633#36749#0" expanded="false" />
+            <element signature="e#27780#36649#0" expanded="false" />
+            <element signature="e#27859#36635#0" expanded="false" />
+            <element signature="e#27993#36617#0" expanded="false" />
+            <element signature="e#28145#29513#0" expanded="false" />
+            <element signature="e#29538#36595#0" expanded="false" />
+            <element signature="e#29607#32622#0" expanded="false" />
+            <element signature="e#32651#35241#0" expanded="false" />
+            <element signature="e#35270#35638#0" expanded="false" />
+            <element signature="e#35716#36569#0" expanded="false" />
+            <element signature="e#36662#36739#0" expanded="false" />
+            <element signature="n#fakeMemberOf#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#37011#37442#0" expanded="false" />
+            <element signature="e#37195#37432#0" expanded="false" />
+            <element signature="e#37322#37418#0" expanded="false" />
+            <element signature="e#37451#37883#0" expanded="false" />
+            <element signature="e#37513#37696#0" expanded="false" />
+            <element signature="e#37570#37682#0" expanded="false" />
+            <element signature="e#37709#37829#0" expanded="false" />
+            <element signature="n#getCountFromCache#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#37960#38100#0" expanded="false" />
+            <element signature="n#saveCountToCache#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#38185#38292#0" expanded="false" />
+            <element signature="n#getUserListPageFromCache#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#38437#38580#0" expanded="false" />
+            <element signature="n#saveUserListPageToCache#0;n#ldapAuthDriver#0;n#!!top" expanded="false" />
+            <element signature="e#38685#38792#0" expanded="false" />
           </folding>
         </state>
       </provider>
