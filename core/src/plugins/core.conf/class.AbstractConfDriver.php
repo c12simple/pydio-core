@@ -54,6 +54,7 @@ abstract class AbstractConfDriver extends AJXP_Plugin
             $this->reloadXPath();
         }
 
+
     }
 
     protected function parseSpecificContributions(&$contribNode)
@@ -385,11 +386,11 @@ abstract class AbstractConfDriver extends AJXP_Plugin
     {
         $userId = AuthService::filterUserSensitivity($userId);
         $abstractUser = $this->instantiateAbstractUserImpl($userId);
-        if (!$abstractUser->storageExists()) {
-            AuthService::updateDefaultRights($abstractUser);
-        }
-        if($update)
-        {
+        if ($update) {
+            if (!$abstractUser->storageExists()) {
+                AuthService::updateDefaultRights($abstractUser);
+            }
+
             AuthService::updateAutoApplyRole($abstractUser);
             AuthService::updateAuthProvidedData($abstractUser);
         }
@@ -1065,30 +1066,39 @@ abstract class AbstractConfDriver extends AJXP_Plugin
                     $baseGroup = AuthService::filterBaseGroup("/");
                 }
                 AuthService::setGroupFiltering(false);
-                $allUsers = AuthService::listUsers($baseGroup, $regexp, 0, $limit, false);
+                $allUsers = AuthService::listUsers($baseGroup, $regexp, 0, $limit, false, true, true);  // last parameter is list only. No update in to db
+
                 if (!$usersOnly) {
-                    //$allGroups = AuthService::listChildrenGroups($baseGroup);
-
-                    // Should filter to get appropriate group
-                    // Etudian => list of groups
-                    // Employee => list of groups  ??
-
-                    //$allUserRoles = AuthService::getRolesList($loggedUser->getRoles(), true, true);
-
-                    $allUserRoles = $loggedUser->getRoles();
-                    /*$allRoles = array();
-                    foreach($allUserRoles as $roleId => $role){
-                        $allRoles[$roleId] = AuthService::getRole($roleId, false);
-                    }*/
-                    //$allRoles = $loggedUser->getRoles();
                     $allGroups = array();
-                    if($allUserRoles){
-                        foreach($allUserRoles as $roleid => $role){
-                            if(strpos($roleid, 'ldapgroup_') === false) continue;
-                            $allGroups[$roleid] = substr($roleid, 10);
-                        }
+
+                    $roleOrGroup = ConfService::getCoreConf("GROUP_OR_ROLE", "conf") ;
+                    switch (strtolower($roleOrGroup["group_switch_value"])){
+                            case 'group':
+                                $authGroups = AuthService::listChildrenGroups($baseGroup);
+                                foreach($authGroups as $gId => $gName) {
+                                $allGroups["AJXP_GRP_/".$gId] = $gName;
+                                }
+                            break;
+                        case 'role':
+                                $allGroups = $this->getUserRoleList($loggedUser);
+                            break;
+                        case 'rolegroup';
+                            $groups = array();
+                            $authGroups = AuthService::listChildrenGroups($baseGroup);
+                            foreach($authGroups as $gId => $gName) {
+                                $groups["AJXP_GRP_/".$gId] = $gName;
+                            }
+                            $roles = $this->getUserRoleList($loggedUser);
+
+                            empty($groups)? $allGroups = $roles: (empty($roles)? $allGroups = $groups: $allGroups = array_merge($groups, $roles));
+                            //$allGroups = array_merge($groups, $roles);
+                            break;
+                        default;
+                            break;
                     }
                 }
+
+
                 $users = "";
                 $index = 0;
                 if ($regexp != null && (!count($allUsers) || (!empty($crtValue) && !array_key_exists(strtolower($crtValue), $allUsers)))  && ConfService::getCoreConf("USER_CREATE_USERS", "conf") && !$existingOnly) {
@@ -1219,4 +1229,51 @@ abstract class AbstractConfDriver extends AJXP_Plugin
         return $xmlBuffer;
     }
 
+    public function getUserRoleList($userObject){
+        if($userObject){
+            $allUserRoles = $userObject->getRoles();
+            $allRoles = array();
+            if($allUserRoles){
+                $ldap_prefix = $userObject->mergedRole->filterParameterValue("core.conf", "PREFIX", null, null);
+                $excludeString = $userObject->mergedRole->filterParameterValue("core.conf", "EXCLUDED", null, null);
+                $includeString = $userObject->mergedRole->filterParameterValue("core.conf", "INCLUDED", null, null);
+
+                $coreConf = ConfService::getCoreConf("GROUP_OR_ROLE", "conf");
+                if(empty($ldap_prefix) && ($coreConf["PREFIX"])) $ldap_prefix = $coreConf["PREFIX"];
+                if(empty($excludeString) && ($coreConf["EXCLUDED"])) $excludeString = $coreConf["EXCLUDED"];
+                if(empty($includeString) && ($coreConf["INCLUDED"])) $includeString = $coreConf["INCLUDED"];
+
+                // Exclude
+                if($excludeString){
+                    if (strpos($excludeString, "preg:") !== false) {
+                        $matchFilterExclude = "/".str_replace("preg:", "", $excludeString)."/i";
+                    } else{
+                        $valueFiltersExclude = array_map("trim", explode(",", $excludeString));
+                        $valueFiltersExclude = array_map("strtolower", $valueFiltersExclude);
+                    }
+                }
+
+                // Include
+                if($includeString){
+                    if (strpos($includeString, "preg:") !== false) {
+                        $matchFilterInclude = "/".str_replace("preg:", "", $includeString)."/i";
+                    } else {
+                        $valueFiltersInclude = array_map("trim", explode(",", $includeString));
+                        $valueFiltersInclude = array_map("strtolower", $valueFiltersInclude);
+                    }
+                }
+
+                // ???
+                foreach($allUserRoles as $roleId => $role){
+                    if(empty($ldap_prefix) || strpos($roleId, $ldap_prefix) === false) continue;
+                    if (isSet($matchFilterExclude) && preg_match($matchFilterExclude, substr($roleId, strlen($ldap_prefix)))) continue;
+                    if (isSet($valueFiltersExclude) && in_array(strtolower(substr($roleId, strlen($ldap_prefix))), $valueFiltersExclude)) continue;
+                    if (isSet($matchFilterInclude) && !preg_match($matchFilterInclude, substr($roleId, strlen($ldap_prefix)))) continue;
+                    if (isSet($valueFiltersInclude) && !in_array(strtolower(substr($roleId, strlen($ldap_prefix))), $valueFiltersInclude)) continue;
+                    $allRoles[$roleId] = substr($roleId, strlen($ldap_prefix));
+                }
+            }
+            return $allRoles;
+        }
+    }
 }

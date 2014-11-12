@@ -952,7 +952,7 @@ class AuthService
      * @param bool $recursive
      * @return AbstractAjxpUser[]
      */
-    public static function listUsers($baseGroup = "/", $regexp = null, $offset = -1, $limit = -1, $cleanLosts = true, $recursive = true)
+    public static function listUsers($baseGroup = "/", $regexp = null, $offset = -1, $limit = -1, $cleanLosts = true, $recursive = true, $listOnly = false)
     {
         $baseGroup = self::filterBaseGroup($baseGroup);
         $authDriver = ConfService::getAuthDriverImpl();
@@ -969,8 +969,12 @@ class AuthService
             if(($userId == "guest" && !ConfService::getCoreConf("ALLOW_GUEST_BROWSING", "auth")) || $userId == "ajxp.admin.users" || $userId == "") continue;
             if($regexp != null && !$authDriver->supportsUsersPagination() && !preg_match("/$regexp/i", $userId)) continue;
 
-            //$allUsers[$userId] = $confDriver->createUserObject($userId, false);
-            $allUsers[$userId] = $confDriver->createUserObject($userId);
+            if($listOnly){
+                $allUsers[$userId] = $confDriver->createUserObject($userId, false);
+            }
+            else{
+                $allUsers[$userId] = $confDriver->createUserObject($userId);
+            }
 
             if ($paginated) {
                 // Make sure to reload all children objects
