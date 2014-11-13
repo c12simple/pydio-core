@@ -292,7 +292,7 @@ class ldapAuthDriver extends AbstractAuthDriver
         //$ret = ldap_search($conn,$this->ldapDN,$filter, $expected);
 
         $cookie = '';
-        if(empty($this->pageSize) && is_numeric($this->pageSize)){
+        if(empty($this->pageSize) || !is_numeric($this->pageSize)){
             $this->pageSize = 500;
         }
 
@@ -336,7 +336,7 @@ class ldapAuthDriver extends AbstractAuthDriver
                         }
 
                         // fake memberOf
-                        if (in_array(strtolower("memberof"), array_map("strtolower", $expected)) && ($this->enableMemberOf)) {
+                        if (in_array(strtolower("memberof"), array_map("strtolower", $expected)) && ($this->enableMemberOf) && method_exists($this, "fakeMemberOf")) {
                             $uid = $entry["dn"];
                             $strldap = "(&" . $this->ldapGFilter . "(member=" . $uid . "))";
                             $this->fakeMemberOf($conn, $this->ldapGDN, $strldap, array("cn"), $entry);
