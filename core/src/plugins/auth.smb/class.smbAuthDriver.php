@@ -76,10 +76,11 @@ class smbAuthDriver extends AbstractAuthDriver
                 return false;
             }
             AJXP_Safe::storeCredentials($login, $pass);
+            return true;
         } catch (Exception $e) {
             return false;
         }
-        return true;
+        return false;
     }
 
     public function usersEditable()
